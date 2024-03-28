@@ -116,7 +116,7 @@
                     <tr>
                         <th>Tracking_code</th>
                         <th>Fullname</th>
-                        <th>Pickup_date</th>
+                        <th>Pick Up Date</th>
                         <th>Purpose</th>
                         <th>Type</th>
                         <!-- <th>Status</th> -->
@@ -143,9 +143,8 @@
                         <th>Business Owner Full Name</th>
                         <th>Business Name</th>
                         <th>Business Nature</th>
-                        <th>Date Applied</th>
                         <!-- <th>Status</th> -->
-                        <th>Date</th>
+                        <th>Date Requested</th>
                         <!-- <th>Actions</th> -->
 
                     </tr>

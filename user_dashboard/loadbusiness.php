@@ -25,7 +25,6 @@ if(isset($_SESSION['user'])) {
             echo "<td>" . $row["business_owner_full_name"] . "</td>";
             echo "<td>" . $row["business_name"] . "</td>";
             echo "<td>" . $row["business_nature"] . "</td>";
-            echo "<td>" . date("F j, Y", strtotime($row["date_applied"])) . "</td>"; // Assuming you want to output the same date as "date applied"
             // echo "<td>" . $row["status"] . "</td>";
             echo "<td>" . date("F j, Y", strtotime($row["date"])) . "</td>"; // Outputting the date in the desired format
             

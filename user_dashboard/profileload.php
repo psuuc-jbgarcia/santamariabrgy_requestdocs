@@ -52,14 +52,16 @@ if($result->num_rows>0){
                     <center>
                        
                         <img src="../user_registration/userimage/<?php echo $userData['profile_picture'] ?>" alt="profile" id="defaultImage" style="height: 200px"><br><br>
+                        <input type="file" id="profilePicture" name="profile_picture" accept="image/*" onchange="previewImage(event)">
+<!-- 
                         <a class="btn btn-primary" id="openCamera">Open Camera</a>
-                        <a class="btn btn-danger" id="capture">Capture</a>
+                        <a class="btn btn-danger" id="capture">Capture</a> -->
                     </center>
                     <hr class="mb-3" >
                     <div class="row mb-3">
     <div class="col">
         <label for="firstname" class="form-label">First Name</label>
-        <input id="firstname" type="text" class="form-control  shadow " name="firstname" value="<?php echo $userData['fname'] ?>" required>
+        <input id="firstname" type="text" class="form-control  shadow " name="firstname" value="<?php echo $userData['fname'] ?>" >
     </div>
     <div class="col">
         <label for="middlename" class="form-label">Middle Name</label>
@@ -67,27 +69,27 @@ if($result->num_rows>0){
     </div>
     <div class="col">
         <label for="lastname" class="form-label">Last Name</label>
-        <input id="lastname" type="text" class="form-control  shadow " name="lastname" value="<?php echo $userData['lname'] ?>" required>
+        <input id="lastname" type="text" class="form-control  shadow " name="lastname" value="<?php echo $userData['lname'] ?>" >
     </div>
 </div>
 <div class="row mb-3">
     <div class="col">
         <label for="alias" class="form-label">Alias</label>
-        <input id="alias" type="text" class="form-control  shadow " name="alias" value="<?php echo $personT['alias']; ?>" required>
+        <input id="alias" type="text" class="form-control  shadow " name="alias" value="<?php echo $personT['alias']; ?>" >
     </div>
     <div class="col">
         <label for="place_of_birth" class="form-label">Place of Birth</label>
-        <input id="place_of_birth" type="text" class="form-control  shadow " name="place_of_birth" value="<?php echo $personT['place_of_birth']; ?>" required>
+        <input id="place_of_birth" type="text" class="form-control  shadow " name="place_of_birth" value="<?php echo $personT['place_of_birth']; ?>" >
     </div>
     <div class="col">
         <label for="birthdate" class="form-label">Birthdate</label>
-        <input id="birthdate" type="date" class="form-control  shadow " name="birthdate" value="<?php echo $personT['birthdate']; ?>" required>
+        <input id="birthdate" type="date" class="form-control  shadow " name="birthdate" value="<?php echo $personT['birthdate']; ?>" >
     </div>
 </div>
 <div class="row mb-3">
     <div class="col">
         <label for="age" class="form-label">Age</label>
-        <input id="religion" type="text" class="form-control shadow" value="<?php echo $personT['age']; ?>" readonly>
+        <input id="age" type="text" class="form-control shadow" value="<?php echo $personT['age']; ?>" >
     </div>
     <div class="col">
         <label for="sex" class="form-label">Sex</label>
@@ -98,22 +100,22 @@ if($result->num_rows>0){
     </div>
     <div class="col">
         <label for="religion" class="form-label">Religion</label>
-        <input id="religion" type="text" class="form-control  shadow " name="religion" value="<?php echo $personT['religion']; ?>" required>
+        <input id="religion" type="text" class="form-control  shadow " name="religion" value="<?php echo $personT['religion']; ?>" >
     </div>
     <div class="col">
         <label for="citizenship" class="form-label">Citizenship</label>
-        <input id="citizenship" type="text" class="form-control  shadow " name="citizenship" value="<?php echo $personT['citizenship']; ?>" required>
+        <input id="citizenship" type="text" class="form-control  shadow " name="citizenship" value="<?php echo $personT['citizenship']; ?>" >
     </div>
 </div>
 <div class="row mb-3">
     <div class="col">
         <label for="civil_status" class="form-label">Civil Status</label>
-        <input id="sttus" type="text" class="form-control  shadow " name="sts" value="<?php echo $personT['civil_status']; ?>" required>
+        <input id="sttus" type="text" class="form-control  shadow " name="sts" value="<?php echo $personT['civil_status']; ?>" >
 
     </div>
     <div class="col">
         <label for="occupation" class="form-label">Occupation</label>
-        <input id="occupation" type="text" class="form-control  shadow " name="occupation" value="<?php echo $personT['occupation']; ?>" required>
+        <input id="occupation" type="text" class="form-control  shadow " name="occupation" value="<?php echo $personT['occupation']; ?>" >
     </div>
     <div class="col">
         <label for="registered_voter" class="form-label">Registered Voter?</label>
@@ -124,14 +126,14 @@ if($result->num_rows>0){
     </div>
     <div class="col">
         <label for="contact_number" class="form-label">Contact Number</label>
-        <input id="contact_number" type="tel" class="form-control  shadow " name="contact_number" value="<?php echo $personT['contact_number']; ?>" required>
+        <input id="contact_number" type="tel" class="form-control  shadow " name="contact_number" value="<?php echo $personT['contact_number']; ?>" >
     </div>
 </div>
 <div class="row mb-3">
     <div class="col-md-3">
         <label class="form-label">Barangay</label>
         <select name="barangay" id="barangay" class="form-select shadow">
-            <option value="" disabled selected>Select Barangay</option>
+            <option value="" >Select Barangay</option>
             <option value="Alipangpang" <?php  if($userData['barangay']=='Alipangpang'){echo 'selected';} ?>>Alipangpang</option>
 
                             <option value="Poblacion East" <?php  if($userData['barangay']=='Poblacion East'){echo 'selected';} ?>>Poblacion East</option>
@@ -163,7 +165,7 @@ if($result->num_rows>0){
     </div>
     <div class="col-md-3">
         <label for="household" class="form-label">Household Number</label>
-        <input id="house" type="text" class="form-control shadow " name="house" value="  <?php echo $personT['household_number']; ?>" required>
+        <input id="house" type="text" class="form-control shadow " name="house" value="<?php echo $personT['household_number']; ?>" >
 
       
     </div>
@@ -194,69 +196,72 @@ if($result->num_rows>0){
 
 ?>
 <script>
-    $(function(){
-function update(){
-formData['firstname'] = $('#firstname').val();
-formData['middlename'] = $('#middlename').val();
-formData['lastname'] = $('#lastname').val();
-formData['alias'] = $('#alias').val();
-formData['place_of_birth'] = $('#place_of_birth').val();
-formData['birthdate'] = $('#birthdate').val();
-formData['sex'] = $('#sex').val();
-formData['religion'] = $('#religion').val();
-formData['citizenship'] = $('#citizenship').val();
-formData['civil_status'] = $('#sttus').val(); // Corrected ID
-formData['occupation'] = $('#occupation').val();
-formData['registered_voter'] = $('#registered_voter').val();
-formData['contact_number'] = $('#contact_number').val();
-formData['barangay'] = $('#barangay').val();
-formData['purok'] = $('#purok').val();
-formData['house'] = $('#house').val();
+    $(function() {
+    // Function to handle click event on the update button
+    $('#update').click(function() {
+        // Get the values of input fields
+        var firstname = $('#firstname').val();
+        var middlename = $('#middlename').val();
+        var lastname = $('#lastname').val();
+        var alias = $('#alias').val();
+        var placeOfBirth = $('#place_of_birth').val();
+        var birthdate = $('#birthdate').val();
+        var sex = $('#sex').val();
+        var religion = $('#religion').val();
+        var citizenship = $('#citizenship').val();
+        var civilStatus = $('#sttus').val();
+        var occupation = $('#occupation').val();
+        var registeredVoter = $('#registered_voter').val();
+        var contactNumber = $('#contact_number').val();
+        var barangay = $('#barangay').val();
+        var purok = $('#purok').val();
+        var householdNumber = $('#house').val();
+        var age=$("#age").val();
+        // Create an object to store the form data
+        var data = {
+            firstname: firstname,
+            middlename: middlename,
+            lastname: lastname,
+            alias: alias,
+            place_of_birth: placeOfBirth,
+            birthdate: birthdate,
+            sex: sex,
+            religion: religion,
+            citizenship: citizenship,
+            civil_status: civilStatus,
+            occupation: occupation,
+            registered_voter: registeredVoter,
+            contact_number: contactNumber,
+            barangay: barangay,
+            purok: purok,
+            household_number: householdNumber,
+            age:age
+        };
 
-}
-    });
-</script>
-<script>
-    $(function(){
-        // Function to open camera
-        $('#openCamera').click(function() {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    var video = document.getElementById('cameraPreview');
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch(function(err) {
-                    console.error('Error accessing the camera: ', err);
-                });
-        });
-
-        // Function to capture image
-        $('#capture').click(function() {
-            var canvas = document.getElementById('captureCanvas');
-            var video = document.getElementById('cameraPreview');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // Convert canvas to data URL
-            var dataURL = canvas.toDataURL('image/png');
-            
-            // Send dataURL to server for processing (you can use AJAX for this)
-            // Example AJAX code:
-            $.ajax({
-                type: 'POST',
-                url: 'process_image.php',
-                data: { image: dataURL },
-                success: function(response) {
-                    // Handle response from server
-                    console.log('Image uploaded successfully');
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error('Error uploading image: ', error);
-                }
-            });
+        // Send formData to server using AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'update_profile.php', // Replace with the URL to handle profile updates
+            data: data,
+            success: function(response) {
+                // Handle success response
+alert(response);            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error('Error updating profile: ', error);
+            }
         });
     });
+});
+
 </script>
+<script>  function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function(){
+            var dataURL = reader.result;
+            var img = document.getElementById('profileImage');
+            img.src = dataURL;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }</script>

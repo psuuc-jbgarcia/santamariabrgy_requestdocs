@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Form</title>
+    <title>Profile</title>
 
     <!-- Preloading CSS and JavaScript files -->
     <link rel="preload" as="style" href="https://bis.lgustamaria-pangasinan.com/build/assets/app-041e359a.css" />

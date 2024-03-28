@@ -132,6 +132,7 @@ lname:lname,
                 alert(response);
                 setTimeout(function() {
                     window.location.href = "form.php";
+                    
                 }, 1000); 
             }
                 else {
