@@ -4,7 +4,7 @@
 
 <?php
 require '../connection.php';
-$stmt = "SELECT * FROM permits order by date";
+$stmt = "SELECT * FROM permits order by date DESC";
 $result = $conn->prepare($stmt);
 $result->execute();
 $data = $result->get_result();
@@ -36,7 +36,7 @@ $data = $result->get_result();
                 <td> <select class="form-control" id="statusB">
                 <option value="Pending" <?php echo ($row['status'] == 'Pending') ? 'selected' : ''; ?>>Pending</option>
 
-    <option value="Process" <?php echo ($row['status'] == 'Processing') ? 'selected' : ''; ?>>Process</option>
+    <option value="Process" <?php echo ($row['status'] == 'Process') ? 'selected' : ''; ?>>Process</option>
     <option value="Ready to Pick Up" <?php echo ($row['status'] == 'Ready to Pick Up') ? 'selected' : ''; ?>>Ready to Pick Up</option>
     <option value="Released" <?php echo ($row['status'] == 'Released') ? 'selected' : ''; ?>>Released</option>
 </select>

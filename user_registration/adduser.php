@@ -22,7 +22,7 @@ $brgy = sanitize($_POST['brgy']);
 $imageDataURL = $_POST["imageDataURL"];
 
 // Check if all required fields are provided
-if (empty($username) || empty($email) || empty($password)||empty($fname)||empty($mname)||empty($lname) || empty($cpass) ||  empty($purok) || empty($brgy) || empty($imageDataURL)) {
+if (empty($username) || empty($email) || empty($password)||empty($fname)||empty($mname)||empty($lname) || empty($cpass) ||  empty($purok) || empty($brgy)) {
     echo "Error: All fields are required.";
     exit;
 }
@@ -63,18 +63,39 @@ if ($usernameCheckResult->num_rows > 0) {
     echo "Error: Username already taken.";
     exit;
 }
-
-// Proceed with image upload
-$base64Image = str_replace('data:image/jpeg;base64,', '', $imageDataURL);
-$imageData = base64_decode($base64Image);
 $uploadDirectory = '../user_registration/userimage/';
-$filename = 'snapshot_' . time() . '.jpg';
-$filePath = $uploadDirectory . $filename;
 
-if (!file_put_contents($filePath, $imageData)) {
-    echo "Error: Failed to save image.";
-    exit;
+// Proceed with image upload if user captured a picture
+if (!empty($imageDataURL)) {
+    $base64Image = str_replace('data:image/jpeg;base64,', '', $imageDataURL);
+    $imageData = base64_decode($base64Image);
+    $filename = 'snapshot_' . time() . '.jpg';
+    $filePath = $uploadDirectory . $filename;
+
+    if (!file_put_contents($filePath, $imageData)) {
+        echo "Error: Failed to save image.";
+        exit;
+    }
+} else {
+    // User skipped image capture, set default picture filename
+    $filename = 'defaultpic.png'; // Change this to your default picture filename
 }
+
+// Insert user data into the database
+$hashedPasswordUser=password_hash($password,PASSWORD_BCRYPT);
+$insertStmt = $conn->prepare("INSERT INTO users (username, email, passwords, fname,mname,lname,gender, purok, barangay, profile_picture) VALUES (?, ?, ?, ?, ?, ?,?, ?,?,?)");
+$insertStmt->bind_param("ssssssssss", $username, $email, $hashedPasswordUser, $fname,$mname,$lname, $gender,$purok, $brgy, $filename);
+
+if ($insertStmt->execute()) {
+    echo "Registered Successfully";
+    $_SESSION['user']=$username;
+    $_SESSION['email']=$email;
+
+    exit();
+} else {
+    echo "Error: Failed to register user.";
+}
+
 
 // Insert user data into the database
 $hashedPasswordUser=password_hash($password,PASSWORD_BCRYPT);

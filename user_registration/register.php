@@ -136,9 +136,15 @@
                 <div id="camera-container">
                     <video id="camera-feed" autoplay></video>
                     <canvas id="snapshot" style="display:none;"></canvas>
+                    <img id="taken-picture" src="" style="display: none;">
+
                 </div>
+                
+                <button type="button" id="skipPicture" class="btn btn-secondary btn-lg btn-block mt-3">Skip taking a picture</button> <!-- Removed onclick attribute -->
+
                 <button type="button" id="takePicture" class="btn btn-success btn-lg btn-block mt-3">Take Picture</button>
-                <button type="button" id="retakePicture" class="btn btn-secondary btn-lg btn-block mt-3" style="display:none;">Retake Picture</button>
+<button type="button" id="retakePicture" class="btn btn-secondary btn-lg btn-block mt-3" style="display:none;">Retake Picture</button>
+
                 <form id="register-form" style="display:none; margin-top: 20px;">
 
                     <div class="form-row">
@@ -237,7 +243,8 @@
                         </select>
                     </div>
                     <input type="file" id="profile-picture" style="display:none;">
-                    <button type="button" class="btn btn-success btn-lg btn-block mt-3" id="add">Register</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block mt-3" id="addACCOUNT">Register</button>
+                    
                 </form>
                 <div class="login-link">
                     <p style="color: green;">Already have an account? <a style="color: green;" href="login.php">Login</a></p>
@@ -249,6 +256,21 @@
 
     <script src="register.js">
         
+    </script>
+    <script>
+        
+        // Function to skip taking a picture and proceed to registration
+        $('#skipPicture').click(function() {
+            document.getElementById('profile-picture').value = null;
+
+            $('#register-form').show(); // Show the registration form
+            $('#camera-container').hide(); // Hide the camera feed
+            $('#snapshot').hide(); // Hide the snapshot canvas
+            $('#skipPicture').hide(); // Hide the skip button
+            $('#takePicture').hide(); // Hide the take picture button
+            $('#retakePicture').hide(); 
+        });
+
     </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

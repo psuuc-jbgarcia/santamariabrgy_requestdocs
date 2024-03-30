@@ -6,7 +6,7 @@
 
 <?php
 require '../connection.php';
-$stmt = "SELECT * FROM certificates order by date";
+$stmt = "SELECT * FROM certificates order by date DESC";
 $result = $conn->prepare($stmt);
 $result->execute();
 $data = $result->get_result();

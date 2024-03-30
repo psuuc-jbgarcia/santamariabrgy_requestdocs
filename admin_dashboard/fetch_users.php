@@ -17,8 +17,10 @@ $data = $result->get_result();
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
-            <th>Email</th>
+
             <th>Barangay</th>
+            <th>Email</th>
+    
             <th>Action</th>
         </tr>
     </thead>
@@ -110,7 +112,6 @@ $data = $result->get_result();
 
         function deleteUser(id) {
     $.get("delete_user.php?id=" + id, function(response) {
-        alert(response);
         // Hide modal after deletion
         $('#deleteConfirmationModal').modal('hide');
         // Reload the table after deletion

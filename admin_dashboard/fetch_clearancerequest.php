@@ -1,10 +1,9 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <h1>Barangay Clearance Requests</h1>
 
 
 <?php
 require '../connection.php';
-$stmt = "SELECT * FROM clearance order by date";
+$stmt = "SELECT * FROM clearance order by date DESC";
 $result = $conn->prepare($stmt);
 $result->execute();
 $data = $result->get_result();
@@ -44,31 +43,34 @@ $data = $result->get_result();
 
 <script>
     $(document).ready(function() {
-        $('#requestsTableC').DataTable();
-        $('select[id^="status"]').change(function() {
-            var trackingCode = $(this).closest('tr').find('td:first-child').text().trim(); // Get tracking code from the first column of the same row
-            var newStatus = $(this).val();
-            var data = {
-                trackingCode: trackingCode,
-                newStatus: newStatus
-            }
-            $.ajax({
-                url: 'updatestatus_clearance.php',
-                method: 'POST',
-                data: data,
-                dataType: 'json',
-                success: function(response) {
-                    Swal.fire({
-                        title: response.title,
-                        text: response.text,
-                        icon: response.icon
-                    });
+    $('#requestsTableC').DataTable();
+    $('select[id^="status"]').change(function() {
+        var trackingCode = $(this).closest('tr').find('td:first-child').text().trim();
+        var newStatus = $(this).val();
+        var data = {
+            trackingCode: trackingCode,
+            newStatus: newStatus
+        };
 
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
+        $.ajax({
+            url: 'updatestatus_clearance.php',
+            method: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function(response) {
+                Swal.fire({
+                    title: response.title,
+                    text: response.text,
+                    icon: response.icon
+                });
+                // Reload table data
+                $('#requestsTableC').DataTable().ajax.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
         });
     });
+});
+
 </script>

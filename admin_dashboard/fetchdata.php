@@ -39,6 +39,7 @@ if ($result_indigency_cert->num_rows > 0) {
 }
 
 // Query to get the number of requests for Residency Certificate
+// Query to get the number of requests for Residency Certificate
 $sql_residency_cert = "SELECT COUNT(*) AS residency_count FROM residency";
 $result_residency_cert = $conn->query($sql_residency_cert);
 $residency_count = 0;
@@ -46,6 +47,7 @@ if ($result_residency_cert->num_rows > 0) {
   $row = $result_residency_cert->fetch_assoc();
   $request_counts['residency'] = $row["residency_count"];
 }
+
 
 // Query to get the number of users
 $sql_users = "SELECT COUNT(*) AS user_count FROM users";

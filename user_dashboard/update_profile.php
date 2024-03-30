@@ -3,7 +3,7 @@ session_start();
 // Include your database connection file
 require '../connection.php';
 
-// Retrieve data sent from the client-side JavaScript
+$response=array();
 $firstname = $_POST['firstname'];
 $middlename = $_POST['middlename'];
 $lastname = $_POST['lastname'];
@@ -36,11 +36,16 @@ $stmtPersonalInfo->execute();
 if ($stmtUsers==true && $stmtPersonalInfo==true) {
     // If both updates were successful, commit the transaction
     $conn->commit();
-    echo 'Profile updated successfully';
+    $response=[
+        'title'=>'Profile updated successfully',
+        'icon'=>'success'
+    ];
 } else {
     $conn->rollback();
-    // Return an error message
-    echo 'Failed to update profile';
+    $response=[
+        'title'=>'Failed to update profile',
+        'icon'=>'error'
+    ];
 }
 
 // Close the statements
@@ -49,4 +54,5 @@ $stmtPersonalInfo->close();
 
 // Close the database connection
 $conn->close();
+echo json_encode($response);
 ?>

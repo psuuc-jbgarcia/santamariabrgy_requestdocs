@@ -5,7 +5,7 @@
 
 <?php
 require '../connection.php';
-$stmt = "SELECT * FROM suggestions order by date_requested";
+$stmt = "SELECT * FROM suggestions order by date_requested desc";
 $result = $conn->prepare($stmt);
 $result->execute();
 $data = $result->get_result();

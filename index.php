@@ -84,7 +84,7 @@
             <img src="./landingpage/1708167598_download-removebg-preview.png" alt="Logo" class="img-fluid logo-image"> <!-- Add the "img-fluid" class to make the image responsive -->
             <h1 class="display-4">Welcome to Municipality of Sta Maria</h1>
             <p class="lead">Open Hours of Barangay: Monday to Friday (8AM-5PM).</p>
-            <p class="lead">Email at: <a href="mailto:brgyalipangpang@gmail.com" style="text-decoration: none; color:white;">brgyalipangpang@gmail.com</a></p>
+            <p class="lead">Email at: <a href="mailto:stamaria@gmail.com" style="text-decoration: none; color:white;">stamaria@gmail.com</a></p>
             <p class="lead">Make your requests hassle-free!</p>
             <a href="./user_dashboard/about.php" class="btn btn-success btn-lg">About Us</a>
         </div>
@@ -152,6 +152,33 @@
 
             <div class="container">
                 <div class="local-officials">
+                <div class="row">
+                    <div class="col-md-6 text-center" >
+                        <div class="official">
+                            <img src="./image_officials/stamariapangasinan-mayor.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3">
+                            <h5 class="font-weight-bold">HON. JULIUS C. RAMOS
+                            </h5>
+                            <h6 style="color: gray;">Municipal Mayor
+
+
+                            </h6>
+                          
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="official">
+                            <img src="./image_officials/HON.-TEODORO-A.-RAMOS.jpg" alt="Vice Mayor" class="img-fluid rounded-circle mb-3">
+                            <h5 class="font-weight-bold">HON. TEODORO A. RAMOS
+
+                            </h5>
+                            <h6 style="color: gray;">Municipal Vice Mayor</h6>
+                           
+
+
+
+                        </div>
+                    </div>
+                </div>
                     <!-- Second Row: Councilors -->
                     <div class="row mt-5">
                         <div class="col-md-4">
@@ -250,7 +277,7 @@
                 </div>
                 <!-- 4th Row: Mayor and Vice Mayor -->
                 <div class="row">
-                    <div class="col-md-6 text-center" onclick="alert('clicked')">
+                    <div class="col-md-6 text-center">
                         <div class="official">
                             <img src="./image_officials/HON.-MOISES-M.-HORTALEZA.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3">
                             <h5 class="font-weight-bold">HON. MOISES M. HORTALEZA III
@@ -269,7 +296,7 @@
                             <img src="./image_officials/HON.-GIAN-FRANCO-A.-GINEZ.jpg" alt="Vice Mayor" class="img-fluid rounded-circle mb-3">
                             <h5 class="font-weight-bold">HON. GIAN FRANCO C. GINEZ
                             </h5>
-                            <h6 style="color: gray;">Municipal Vice Mayor</h6>
+                            <h6 style="color: gray;">Municipal Councilor</h6>
                             <h6 style="color: gray;"> Chairman: Health and Sanitation; Cooperatives
                             </h6>
 
@@ -290,7 +317,7 @@
     </div>
     <div class="container">
     <div class="row">
-        <div class="col-md-12 text-center" onclick="alert('clicked')">
+        <div class="col-md-12 text-center" >
             <div class="official">
                 <img src="./image_officials/1705868790_Simon L. Maningding2.png" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
                 <h5 class="font-weight-bold">HON. Simon Maningding</h5>
@@ -300,14 +327,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 text-center" onclick="alert('clicked')">
+        <div class="col-md-6 text-center" >
             <div class="official">
                 <img src="./image_officials/kagawad.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
                 <h5 class="font-weight-bold">HON. Juanito Bernardo</h5>
                 <p style="color: gray;">Barangay Kagawad</p>
             </div>
         </div>
-        <div class="col-md-6 text-center" onclick="alert('clicked')">
+        <div class="col-md-6 text-center" >
             <div class="official">
                 <img src="./image_officials/1704970139_number_9-webp (1) (2).jpg" alt="Another Image" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
                 <h5 class="font-weight-bold">Rhovie Jane Abenojar</h5>
@@ -316,14 +343,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 text-center" onclick="alert('clicked')">
+        <div class="col-md-6 text-center" >
             <div class="official">
                 <img src="./image_officials/1702911762_juanits.png" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
                 <h5 class="font-weight-bold">HON. Juanito Abenojar</h5>
                 <p style="color: gray;">Barangay Kagawad</p>
             </div>
         </div>
-        <div class="col-md-6 text-center" onclick="alert('clicked')">
+        <div class="col-md-6 text-center" >
             <div class="official">
                 <img src="./image_officials/k1.jpg" alt="Another Image" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
                 <h5 class="font-weight-bold">Juan Cruz</h5>
@@ -428,10 +455,20 @@
 }
 
 </script>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "iMh1QFSwqoXcpcnI_GVuD",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="iMh1QFSwqoXcpcnI_GVuD"
+domain="www.chatbase.co"
+defer>
+</script>
 
 
-    <!-- Proceed to Service Function -->
-    <!-- <script src="script.js"></script> -->
 </body>
 
 </html>
