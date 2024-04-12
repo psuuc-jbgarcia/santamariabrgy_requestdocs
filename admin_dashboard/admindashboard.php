@@ -56,12 +56,18 @@ $nameAdmin = $_SESSION['name'];
     </button>
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav ml-md-auto"> <!-- Adjusted class to align items to the right on medium and larger devices -->
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="loutadmin"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <ul class="navbar-nav ml-md-auto">
+        <li class="nav-item dropdown"> <!-- Added dropdown class -->
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> <?php echo $nameAdmin; ?>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="logout.php" id="loutadmin"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
         </li>
-      </ul>
-    </div>
+    </ul>
+</div>
+
   </nav>
 
   <!-- Sidebar -->
@@ -104,9 +110,7 @@ $nameAdmin = $_SESSION['name'];
             <li class="nav-item">
               <a class="nav-link" href="#payment-management-tab" data-toggle="tab"><i class="fas fa-money-bill-alt"></i> Payment Management</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#template" data-toggle="tab"><i class="far fa-file-alt"></i>Logs</a>
-            </li>
+          
             <li class="nav-item">
               <a class="nav-link" href="#logs" data-toggle="tab"><i class="fas fa-check"></i>Logs</a>
             </li>

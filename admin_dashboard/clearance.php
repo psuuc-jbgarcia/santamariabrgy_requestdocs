@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Clearance</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5/dist/jspdf.es.min.js"></script>
     <style>
         body {
             font-family: 'Times New Roman', Times, serif; /* Change font-family to Times New Roman */
@@ -173,8 +172,10 @@
         </div>
     </div>
     <center>
+        <div style="margin-bottom: 50px;">
         <button id="reset-btn" class="btn btn-theme" onclick="resetForm()">Reset Form</button>
         <button id="download-pdf-btn" class="btn btn-theme" onclick="printPDF()">Download PDF</button>
+        </div>
 
     </center>
 
@@ -192,8 +193,11 @@
             const issueDate = document.getElementById("issueDate").value;
             const expiryDate = document.getElementById("expiryDate").value;
             const expiryDateObj = new Date(expiryDate);
+            const issued = new Date(issueDate);
 
 // Format the date in a human-readable format
+const formattedIssueDate = `${issued.toLocaleDateString('en-US', { weekday: 'long' })}, ${issued.toLocaleDateString('en-US', { month: 'long' })} ${issued.getDate()}, ${issued.getFullYear()}`;
+
 const formattedExpiryDate = `${expiryDateObj.toLocaleDateString('en-US', { weekday: 'long' })}, ${expiryDateObj.toLocaleDateString('en-US', { month: 'long' })} ${expiryDateObj.getDate()}, ${expiryDateObj.getFullYear()}`;
             const clearanceOutput = document.getElementById("clearance-output");
             clearanceOutput.innerHTML = `
@@ -204,12 +208,11 @@ const formattedExpiryDate = `${expiryDateObj.toLocaleDateString('en-US', { weekd
                 <p class="theme-color">This Barangay Clearance is issued to attest that the said individual is of good moral character, has no pending liabilities or obligations with the barangay, and has no derogatory records within the jurisdiction of Barangay <span class="font-weight-bold">${barangayName}</span>.</p>
                 <br>
                 <br>
-                <h3 class="theme-color">Purpose of Barangay Clearance:</h3>
+                <p class="theme-color">This Barangay Clearance is issued for the purpose of ${purpose}.</p>
 
-                <p class="theme-color">${purpose}</p>
                 <br>
                 <br>
-                <p class="theme-color">This clearance is valid until <span class="font-weight-bold">${formattedExpiryDate}</span>.</p>
+                <p class="theme-color">This clearance, issued on <span class="font-weight-bold">${formattedIssueDate}</span>, is valid until <span class="font-weight-bold">${formattedExpiryDate}</span>.</p>
                 <br>
                 <br>
                 <br>

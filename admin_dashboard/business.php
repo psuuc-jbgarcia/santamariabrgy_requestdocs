@@ -113,7 +113,7 @@
 <body>
     <div class="container p-4" style="height: 1200px;" >
         <div class="logo-wrapper">
-            <img src="../landingpage/your_logo.png" alt="Your Logo">
+            <img src="../landingpage/1708167598_download-removebg-preview.png" alt="Your Logo">
             <div>
                 <center>
                     <h3 class="theme-color">Republic of the Philippines</h3>
@@ -125,7 +125,7 @@
                     <p class="theme-color">Municipality of Your Municipality</p>
                 </center>
             </div>
-            <img src="../landingpage/philippines_logo.png" alt="Philippines Logo" >
+            <img src="../landingpage/1708167598_download-removebg-preview.png" alt="Philippines Logo" >
         </div>
         <hr>
         <div class="content">
@@ -171,8 +171,10 @@
         </div> 
     </div>
     <center>
-        <button id="reset-btn" class="btn btn-theme" onclick="resetForm()">Reset Form</button>
+       <div style="margin-bottom: 50px;">
+       <button id="reset-btn" class="btn btn-theme" onclick="resetForm()">Reset Form</button>
         <button id="download-pdf-btn" class="btn btn-theme" onclick="printPDF()">Download PDF</button>
+       </div>
     </center>
 
     <script>
@@ -189,20 +191,25 @@
             const startDate = document.getElementById("startDate").value;
             const endDate = document.getElementById("endDate").value;
             const endDateObj = new Date(endDate);
+            const issueDateObj = new Date(startDate);
 
             // Format the date in a human-readable format
             const formattedEndDate = `${endDateObj.toLocaleDateString('en-US', { weekday: 'long' })}, ${endDateObj.toLocaleDateString('en-US', { month: 'long' })} ${endDateObj.getDate()}, ${endDateObj.getFullYear()}`;
+            const formattedIssueDate = issueDateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
             const permitOutput = document.getElementById("permit-output");
             permitOutput.innerHTML = `
                 <br>
                 <br>
                 <br>
-                <p class="theme-color">This is to certify that <span class="font-weight-bold">${ownerName}</span>, owner of <span class="font-weight-bold">${businessName}</span>, has applied for a Business Permit for the operation of a <span class="font-weight-bold">${businessType}</span> business.</p>
-                <p class="theme-color">This Business Permit is valid from <span class="font-weight-bold">${startDate}</span> to <span class="font-weight-bold">${formattedEndDate}</span>.</p>
-                <br>
-                <br>
-                <br>
+                <p class="theme-color">I hereby certify that <span class="font-weight-bold">${ownerName}</span>, owner of <span class="font-weight-bold">${businessName}</span>, has applied for a Business Permit for the operation of a <span class="font-weight-bold">${businessType}</span> business.</p>
+<p class="theme-color">This Business Permit is granted in accordance with the regulations set forth by the municipality.</p>
+<p class="theme-color">The issuance of this permit signifies compliance with all relevant laws and ordinances governing business operations.</p>
+<p class="theme-color">This Business Permit is valid from <span class="font-weight-bold">${formattedIssueDate}</span> to <span class="font-weight-bold">${formattedEndDate}</span>.</p>
+<br>
+<br>
+<br>
+
             `;
             permitOutput.style.display = "block";
             document.getElementById("permit-form").style.display = "none";

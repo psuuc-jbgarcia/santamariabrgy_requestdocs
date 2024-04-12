@@ -231,7 +231,16 @@ function generateDocument(trackingCode, email, requestType) {
         window.location.href = 'clearance.php?trackingCode=' + trackingCode + '&email=' + email;
     } else if (requestType === 'Business Permit') {
         window.location.href = 'business.php?trackingCode=' + trackingCode + '&email=' + email;
-    } else {
+    }
+    else if(requestType=="Residency Certificate"){
+        window.location.href = 'residency.php?trackingCode=' + trackingCode + '&email=' + email;
+
+    }
+    else if(requestType=="Indigency Certificate"){
+        window.location.href = 'indigency.php?trackingCode=' + trackingCode + '&email=' + email;
+
+    }
+    else {
         // Handle other request types if needed
         alert('Invalid request type');
     }
