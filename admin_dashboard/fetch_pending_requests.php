@@ -3,13 +3,13 @@
 require '../connection.php';
 
 // Fetch pending requests from all four tables
-$query = "SELECT tracking_code, full_name AS name, 'Indigency Certificate' AS document_type, email FROM certificates WHERE status = 'Pending'
+$query = "SELECT tracking_code, full_name AS name, 'Indigency Certificate' AS document_type, email FROM certificates 
           UNION
-          SELECT tracking_code, fullname AS name, 'Barangay Clearance' AS document_type, email FROM clearance WHERE status = 'Pending'
+          SELECT tracking_code, fullname AS name, 'Barangay Clearance' AS document_type, email FROM clearance
           UNION
-          SELECT tracking_code, business_owner_full_name AS name, 'Business Permit' AS document_type, email FROM permits WHERE status = 'Pending'
+          SELECT tracking_code, business_owner_full_name AS name, 'Business Permit' AS document_type, email FROM permits 
           UNION
-          SELECT tracking_code, full_name AS name, 'Residency Certificate' AS document_type, email FROM residency WHERE status = 'Pending'";
+          SELECT tracking_code, full_name AS name, 'Residency Certificate' AS document_type, email FROM residency ";
 
 $result = $conn->query($query);
 

@@ -12,6 +12,8 @@ if (!$_SESSION['user']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Request System</title>
+    <link rel="icon" href="../landingpage/1708167598_download-removebg-preview.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- SweetAlert CSS -->
@@ -48,6 +50,31 @@ if (!$_SESSION['user']) {
                 font-size: 18px;
             }
         }
+/* CSS for notification container */
+.notification-container {
+    position: relative;
+    display: inline-block; /* Ensures elements are displayed in line */
+}
+
+/* CSS for notification count badge */
+#msgcount {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+    /* Adjust the badge size and position for smaller devices */
+    #msgcount {
+        transform: none;
+        top: auto;
+        right: -8px;
+        bottom: 0;
+    }
+}
+
 
         /* Add more media queries for larger devices if needed */
     </style>
@@ -102,16 +129,25 @@ if (!$_SESSION['user']) {
                     ?>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="profile.php">Profile</a>
-                    <a class="dropdown-item" href="requestedDocs.php">Requested Documents</a>
-                    <a class="dropdown-item" href="suggestUI.php">Your Suggestions</a>
-
+                    <a class="dropdown-item" href="profile.php"><i class="fas fa-user"></i> Profile</a>
+                    <a class="dropdown-item" href="requestedDocs.php"><i class="fas fa-file-alt"></i> Requested Documents</a>
+                    <a class="dropdown-item" href="suggestUI.php"><i class="fas fa-comments"></i> Your Suggestions</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" id="logoutBtn">Logout</a>
+                    <a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
+
             </div>
-        </div>
+            <div class="notification-container">
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#notificationModal">
+        <i class="fas fa-bell"></i> <!-- Font Awesome bell icon -->
+    </button>
+    <div id="msgcount" class="msgcount">
+        <span id="notificationBadge" class="badge badge-danger">1</span>
     </div>
+</div>
+
+
+
 </nav>
 
 
@@ -121,7 +157,7 @@ if (!$_SESSION['user']) {
     <div class="container mt-5" id="home">
         <div class="jumbotron hero-image position-relative" style="background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('../landingpage/backround.png'); background-repeat: no-repeat; background-size: cover; min-height: 80vh;">
             <div class="container hero-text text-center">
-                <img src="../landingpage/1708167598_download-removebg-preview.png" alt="Logo" class="logo-image"> <!-- Add your logo image here -->
+                <img src="../landingpage/logo.gif" alt="Logo" class="logo-image"> <!-- Add your logo image here -->
                 <h1 class="display-4">Welcome to Municipality of Sta Maria</h1>
                 <p class="lead">Open Hours of Barangay: Monday to Friday (8AM-5PM).</p>
                 <p class="lead">Email at: <a href="stamaria@gmail.com" style="text-decoration: none; color:white;">stamaria@gmail.com</a></p>
@@ -191,7 +227,7 @@ if (!$_SESSION['user']) {
         <h4 class="text-white" id="trackdocs">TRACK YOUR DOCS</h4>
     </div>
     <div class="container mt-5">
-        <h1 class="mb-4" >Track Documents</h1>
+        <h1 class="mb-4">Track Documents</h1>
         <div id="track-docs-section" class="card" style="height: 450px;">
             <div class="card-body">
                 <p class="card-text">Track your documents by entering the tracking ID below:</p>
@@ -229,33 +265,33 @@ if (!$_SESSION['user']) {
 
     <div class="container">
         <div class="local-officials">
-        <div class="row">
-                    <div class="col-md-6 text-center">
-                        <div class="official">
-                            <img src="../image_officials/stamariapangasinan-mayor.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3">
-                            <h5 class="font-weight-bold">HON. JULIUS C. RAMOS
-                            </h5>
-                            <h6 style="color: gray;">Municipal Mayor
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="official">
+                        <img src="../image_officials/stamariapangasinan-mayor.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3">
+                        <h5 class="font-weight-bold">HON. JULIUS C. RAMOS
+                        </h5>
+                        <h6 style="color: gray;">Municipal Mayor
 
 
-                            </h6>
-                          
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <div class="official">
-                            <img src="../image_officials/HON.-TEODORO-A.-RAMOS.jpg" alt="Vice Mayor" class="img-fluid rounded-circle mb-3">
-                            <h5 class="font-weight-bold">HON. TEODORO A. RAMOS
+                        </h6>
 
-                            </h5>
-                            <h6 style="color: gray;">Municipal Vice Mayor</h6>
-                           
-
-
-
-                        </div>
                     </div>
                 </div>
+                <div class="col-md-6 text-center">
+                    <div class="official">
+                        <img src="../image_officials/HON.-TEODORO-A.-RAMOS.jpg" alt="Vice Mayor" class="img-fluid rounded-circle mb-3">
+                        <h5 class="font-weight-bold">HON. TEODORO A. RAMOS
+
+                        </h5>
+                        <h6 style="color: gray;">Municipal Vice Mayor</h6>
+
+
+
+
+                    </div>
+                </div>
+            </div>
             <!-- Second Row: Councilors -->
             <div class="row mt-5">
                 <div class="col-md-4">
@@ -388,59 +424,10 @@ if (!$_SESSION['user']) {
     </div>
     </div>
 
+
     <div class="bg-success" style="background-color: #6c757d; padding: 0.75rem; text-align: center; margin-top: 1rem;">
-    <h4 class="text-white">BARANGAY OFFICIALS</h4>
-</div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="official">
-                    <img src="../image_officials/1705868790_Simon L. Maningding2.png" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                    <h5 class="font-weight-bold">HON. Simon Maningding</h5>
-                    <p style="color: gray;">Barangay Chairman</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <div class="official">
-                    <img src="../image_officials/kagawad.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                    <h5 class="font-weight-bold">HON. Juanito Bernardo</h5>
-                    <p style="color: gray;">Barangay Kagawad</p>
-                </div>
-            </div>
-            <div class="col-md-6 text-center" >
-                <div class="official">
-                    <img src="../image_officials/1704970139_number_9-webp (1) (2).jpg" alt="Another Image" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                    <h5 class="font-weight-bold">Rhovie Jane Abenojar</h5>
-                    <p style="color: gray;">Barangay Kagawad</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 text-center" >
-                <div class="official">
-                    <img src="../image_officials/1702911762_juanits.png" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                    <h5 class="font-weight-bold">HON. Juanito Abenojar</h5>
-                    <p style="color: gray;">Barangay Kagawad</p>
-                </div>
-            </div>
-            <div class="col-md-6 text-center" >
-                <div class="official">
-                    <img src="../image_officials/k1.jpg" alt="Another Image" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                    <h5 class="font-weight-bold">Juan Cruz</h5>
-                    <p style="color: gray;">Barangay Kagawad</p>
-                </div>
-            </div>
-        </div>
-
-
+        <h4 class="text-white">MAP</h4>
     </div>
-   
-    <div class="bg-success" style="background-color: #6c757d; padding: 0.75rem; text-align: center; margin-top: 1rem;">
-    <h4 class="text-white">MAP</h4>
-</div>
 
     <div id="map" class="mt-5">
         <div class="container">
@@ -506,7 +493,7 @@ if (!$_SESSION['user']) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="logout.js"></script>
+
     <div class="modal fade" id="serviceModal" tabindex="-1" role="dialog" aria-labelledby="serviceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -614,10 +601,11 @@ if (!$_SESSION['user']) {
             // Show the modal
         }
     </script>
-    <script src="logout.js"></script>
     <script src="getdata.js"></script>
     <script src="search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="logout.js"></script>
+
     <script>
         $(function() {
             $('#serviceModal').on('shown.bs.modal', function(e) {
@@ -673,8 +661,10 @@ if (!$_SESSION['user']) {
             function addClearance() {
                 var tracking = $("#clearanceTrackingCode").val();
                 var fullname = $("#clearanceFullName").val();
-                var pickupdate = $("#clearanceDateApplied").val();
+                var pickupdate = $("#clearancePickUpDate").val();
                 var purpose = $("#clearancePurpose").val();
+                var recipent = $("#recipientName").val();
+                
                 var type = $("#type").val();
                 var status = "Pending";
                 var data = {
@@ -682,6 +672,7 @@ if (!$_SESSION['user']) {
                     fullname: fullname,
                     pickupdate: pickupdate,
                     purpose: purpose,
+                    recipent: recipent,
                     type: type,
                     status: status,
 
@@ -697,6 +688,7 @@ if (!$_SESSION['user']) {
                             text: response.text,
                             icon: response.icon
                         });
+                        console.log(response)
                         if (response.icon == "success") {
                             $('#serviceModal').modal('hide');
 
@@ -715,12 +707,14 @@ if (!$_SESSION['user']) {
                 var businessOwnerFullName = $('#permitBusinessOwnerFullName').val();
                 var businessName = $('#permitBusinessName').val();
                 var businessNature = $('#permitBusinessNature').val();
+                var recipent = $("#recipientPermits").val();
                 var dateApplied = $('#permitDateApplied').val();
                 var data = {
                     trackingCode: trackingCode,
                     businessOwnerFullName: businessOwnerFullName,
                     businessName: businessName,
                     businessNature: businessNature,
+                    recipent: recipent,
                     dateApplied: dateApplied,
                     type: type,
                     status: status
@@ -756,6 +750,7 @@ if (!$_SESSION['user']) {
                 var income = $('#indigencyIncome').val();
                 var pickUpDate = $('#indigencyPickUpDate').val();
                 var purpose = $('#indigencyPurpose').val();
+                var recipent = $("#recipientIndi").val();
                 var type = "Indigency Certificate";
                 var status = "Pending";
                 var data = {
@@ -765,6 +760,7 @@ if (!$_SESSION['user']) {
                     income: income,
                     pickUpDate: pickUpDate,
                     purpose: purpose,
+                    recipent: recipent,
                     type: type,
                     status: status
                 }
@@ -796,7 +792,7 @@ if (!$_SESSION['user']) {
                 var fullName = $('#residencyFullName').val();
                 var pickUpDate = $('#residencyPickUpDate').val();
                 var purpose = $('#residencyPurpose').val();
-
+                var recipent = $("#recipientResi").val();
                 var type = "Residency Certificate";
                 var status = "Pending";
                 var data = {
@@ -804,6 +800,7 @@ if (!$_SESSION['user']) {
                     fullName: fullName,
                     pickUpDate: pickUpDate,
                     purpose: purpose,
+                    recipent: recipent,
                     type: type,
                     status: status
                 }
@@ -839,8 +836,63 @@ if (!$_SESSION['user']) {
         });
     </script>
 
-    <!-- Proceed to Service Function -->
-    <!-- <script src="script.js"></script> -->
+<!-- Button to trigger the modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 800px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="notif">
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(function(){
+    notifs();
+    loadmsgcount();
+function notifs(){
+    $("#notif").load("fetch_notif.php");
+}
+function loadmsgcount(){
+    $("#msgcount").load("fetch_messagecount.php");
+}
+setInterval(function(){
+    notifs();
+    loadmsgcount();
+},1000);
+});
+
+</script>
+<script>
+    $(document).ready(function() {
+        function handleModalShown() {
+            $.ajax({
+                url: 'mark_notification_as_read.php', 
+                type: 'POST',
+                success: function(response) {
+                   console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error marking notifications as read:', error); 
+                }
+            });
+        }
+
+        $('#notificationModal').on('shown.bs.modal', handleModalShown);
+    });
+</script>
 
 </body>
 

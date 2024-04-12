@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Barangay Request System</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="shortcut icon" href="../landingpage/1708167598_download-removebg-preview.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -19,8 +20,9 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0; /* Reset default margin */
-            background: linear-gradient(to top, rgba(0,0,0,4), rgba(0,0,0,0.5)), url('../user_registration/bg1.jpg');
+            margin: 0;
+            /* Reset default margin */
+            background: linear-gradient(to top, rgba(0, 0, 0, 4), rgba(0, 0, 0, 0.5)), url('../user_registration/bg1.jpg');
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -35,7 +37,6 @@
         }
 
         .card-header {
-            background-color: #28a745; /* Changed to green */
             color: #ffffff;
             text-align: center;
             border-top-left-radius: 10px;
@@ -52,7 +53,8 @@
         }
 
         .btn-login {
-            background-color: #28a745; /* Changed to green */
+            background-color: #28a745;
+            /* Changed to green */
             border: none;
             color: #ffffff;
             padding: 10px 20px;
@@ -61,7 +63,8 @@
         }
 
         .btn-login:hover {
-            background-color: #218838; /* Darker green on hover */
+            background-color: #218838;
+            /* Darker green on hover */
         }
 
         .forgot-password {
@@ -70,7 +73,8 @@
         }
 
         .forgot-password a {
-            color: #28a745; /* Changed to green */
+            color: #28a745;
+            /* Changed to green */
         }
 
         .register-link {
@@ -79,9 +83,21 @@
         }
 
         .register-link a {
-            color: #28a745; /* Changed to green */
+            color: #28a745;
+            /* Changed to green */
         }
-       
+
+        .error-message {
+            display: none;
+            color: red;
+            /* Set the text color to red */
+            margin-top: 5px;
+            /* Add some space between the input field and the error message */
+        }
+
+        .has-error .form-control {
+            border-color: red;
+        }
     </style>
 </head>
 
@@ -89,24 +105,34 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <img src="1708167598_download-removebg-preview.png" alt="Logo" width="100" height="100"> <!-- Your logo here -->
+                <img src="1708167598_download-removebg-preview.png" alt="Logo" width="100" height="100">
+                <!-- Your logo here -->
             </div>
             <div class="card-body">
                 <form>
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                        <div class="error-message" id="username-error" style="display: none;">Username is required.
+                        </div>
+
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="password" placeholder="Enter your password">
+
                             <div class="input-group-append">
                                 <span class="input-group-text">
-                                    <i class="fas fa-eye" id="togglePassword" style=" color: green; "></i> <!-- Eye icon -->
+                                    <i class="fas fa-eye" id="togglePassword" style=" color: green; "></i>
+                                    <!-- Eye icon -->
                                 </span>
                             </div>
+
                         </div>
+                        <div class="error-message" id="password-error" style="display: none;">Password is
+                            required.</div>
+
                     </div>
                     <button type="button" class="btn btn-login" id="login">Login</button>
                 </form>
@@ -123,59 +149,93 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-        $("#togglePassword").click(function () {
-            var passwordField = $("#password");
-            var icon = $(this);
+    $("#togglePassword").click(function() {
+        var passwordField = $("#password");
+        var icon = $(this);
 
-            if (passwordField.attr("type") === "password") {
-                passwordField.attr("type", "text");
-                icon.removeClass("fa-eye").addClass("fa-eye-slash"); // Change icon to hide password
-            } else {
-                passwordField.attr("type", "password");
-                icon.removeClass("fa-eye-slash").addClass("fa-eye"); // Change icon to show password
-            }
-        });
-
-    $("#login").click(function(){
-        login();
+        if (passwordField.attr("type") === "password") {
+            passwordField.attr("type", "text");
+            icon.removeClass("fa-eye").addClass("fa-eye-slash"); // Change icon to hide password
+        } else {
+            passwordField.attr("type", "password");
+            icon.removeClass("fa-eye-slash").addClass("fa-eye"); // Change icon to show password
+        }
     });
 
-    function login(){
-        var username=$("#username").val();
-        var password=$("#password").val();
-        var data={
-            username:username,
-            password:password
-        }
-
-        $.ajax({
-            url:'login2.php',
-            method:'post',
-            data:data,
-            // dataType: 'json',
-            success:function(result){
-                alert(result);
-                if(result=== 'Welcome admin'){
-                    window.location.href = "../admin_dashboard/admindashboard.php";
-                } else if(result === 'Welcome user'){
-                    window.location.href = "../user_dashboard/userdashboard.php";
-                }
- 
-//                 Swal.fire({
-//   title:result.title,
-//   icon:result.icon,
-
-// });
-// setTimeout(function() {
-//                 if(result.title === 'Welcome admin'){
-//                     window.location.href = "../admin_dashboard/admindashboard.php";
-//                 } else if(result.title === 'Welcome user'){
-//                     window.location.href = "../user_dashboard/userdashboard.php";
-//                 }
-//             }, 1000);
-            },
+    $(document).ready(function() {
+        $("#login").click(function() {
+            login();
         });
-    }
+
+        function login() {
+            var username = $("#username").val().trim();
+            var password = $("#password").val().trim();
+
+            // Clear previous error styles and messages
+            $(".form-group").removeClass("has-error");
+            $(".error-message").hide();
+            if (password === ""&& username === "") {
+                $("#password").closest('.form-group').addClass("has-error");
+                $("#password-error").show();
+                $("#password").focus();
+                $("#username").closest('.form-group').addClass("has-error");
+                $("#username-error").show();
+                $("#username").focus();
+                return; // Stop further execution
+            }
+            // Check for empty fields
+            if (username === "") {
+                $("#username").closest('.form-group').addClass("has-error");
+                $("#username-error").show();
+                $("#username").focus();
+                return; // Stop further execution
+            }
+
+            if (password === "") {
+                $("#password").closest('.form-group').addClass("has-error");
+                $("#password-error").show();
+                $("#password").focus();
+                return; // Stop further execution
+            }
+          
+
+            // Perform login action if all fields are filled
+            var data = {
+                username: username,
+                password: password
+            };
+
+            $.ajax({
+                url: 'login2.php',
+                method: 'post',
+                data: data,
+                dataType: 'text', // Change dataType to 'text'
+                success: function(result) {
+                    if (result == "Password is wrong") {
+                        // Display error message
+                        $("#password").closest('.form-group').addClass("has-error");
+                        $("#password-error").text(result).show();
+                    }
+                    if (result == "Username is not registered") {
+                        // Display error message
+                        $("#username").closest('.form-group').addClass("has-error");
+                        $("#username-error").text(result).show();
+                    }
+                    if (result == "Welcome user") {
+                        setInterval(function() {
+    window.location.href = '../user_dashboard/userdashboard.php';
+}, 1000);
+                    }
+                    if (result == "Welcome admin") {
+                        setInterval(function() {
+    window.location.href = '../admin_dashboard/admindashboard.php';
+}, 1000);
+                    }
+                    // Handle other responses if needed
+                },
+            });
+        }
+    });
 </script>
 
 </html>

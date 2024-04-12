@@ -8,6 +8,10 @@ $pdate = $_POST['pickupdate'];
 $purpose = $_POST['purpose'];
 $type = $_POST['type'];
 $status = $_POST['status'];
+$recipent=$_POST['recipent'];
+if($recipent==""){
+    $recipent="Myself";
+}
 
 // Check if session variables are set and not empty
 if (isset($_SESSION['user']) && isset($_SESSION['email']) && !empty($_SESSION['user']) && !empty($_SESSION['email'])) {
@@ -21,9 +25,9 @@ if (isset($_SESSION['user']) && isset($_SESSION['email']) && !empty($_SESSION['u
             'icon' => 'error'
         ];
     } else {
-        $stmt = "INSERT INTO clearance (tracking_code, fullname, pickup_date, purpose, type, status, username, email, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        $stmt = "INSERT INTO clearance (tracking_code, fullname, pickup_date, purpose, type, status, username, email,recipent, date) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, NOW())";
         $result = $conn->prepare($stmt);
-        $result->bind_param("ssssssss", $tcode, $fullname, $pdate, $purpose, $type, $status, $username, $email);
+        $result->bind_param("sssssssss", $tcode, $fullname, $pdate, $purpose, $type, $status, $username, $email,$recipent);
         $result->execute();
 
         if ($result == true) {

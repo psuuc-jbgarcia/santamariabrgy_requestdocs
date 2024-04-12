@@ -136,6 +136,12 @@
                 }
                 $.post("resetpass2.php", data, function (response) {
                     alert(response);
+                    if(response=="Your password has been changed."){
+                        setTimeout(function(){
+    window.location.href = "login.php";
+}, 2000); // 2000 milliseconds delay (2 seconds)
+
+                }
                 });
             }
 

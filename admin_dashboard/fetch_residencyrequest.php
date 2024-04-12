@@ -5,7 +5,7 @@
 
 <?php
 require '../connection.php';
-$stmt = "SELECT * FROM residency order by date_requested desc";
+$stmt = "SELECT * FROM residency WHERE status='Pending' or status='Process' or status='Ready to Pick Up' order by date_requested DESC";
 $result = $conn->prepare($stmt);
 $result->execute();
 $data = $result->get_result();

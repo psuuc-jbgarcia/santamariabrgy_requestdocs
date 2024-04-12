@@ -32,7 +32,6 @@ if(isset($_POST['newpass']) && isset($_POST['confirmpass'])) {
 
     if($result->execute() === true) {
         echo "Your password has been changed.";
-        header("Refresh:1;url=login.php");
         session_destroy(); // Destroy session after successful password change
     } else {
         echo 'Error occurred while updating password.';

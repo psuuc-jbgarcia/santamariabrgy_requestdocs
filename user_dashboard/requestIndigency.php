@@ -13,6 +13,10 @@ $type = $_POST['type'];
 $status = $_POST['status'];
 $username = $_SESSION['user'];
 $email = $_SESSION['email'];
+$recipent=$_POST['recipent'];
+if($recipent==""){
+    $recipent="Myself";
+}
 
 
 // Check if any required field is empty
@@ -25,8 +29,8 @@ if ($occupation == "" || $income == "" || $pickUpDate == "" || $purpose == "" ||
     // echo "SS";
 } else {
     // Insert data into the database
-    $stmt = $conn->prepare("INSERT INTO certificates (tracking_code, full_name, occupation, income, pick_up_date, purpose, type, status, date, username,email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?,?)");
-    $stmt->bind_param("ssssssssss", $trackingCode, $fullName, $occupation, $income, $pickUpDate, $purpose, $type, $status, $username,$email);
+    $stmt = $conn->prepare("INSERT INTO certificates (tracking_code, full_name, occupation, income, pick_up_date, purpose, type, status, date, username,email,recipent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?,?,?)");
+    $stmt->bind_param("sssssssssss", $trackingCode, $fullName, $occupation, $income, $pickUpDate, $purpose, $type, $status, $username,$email,$recipent);
 
     if ($stmt->execute()) {
         $response = [

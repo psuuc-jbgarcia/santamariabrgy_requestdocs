@@ -49,6 +49,24 @@ if ($result->num_rows == 1) {
             <textarea class="form-control" id="indigencyPurpose" rows="3" placeholder="Enter purpose"></textarea>
         </div>
     </div>
+    <div class="form-group row">
+    <label for="recipient" class="col-sm-3 col-form-label font-weight-bold">Recipient:</label>
+    <div class="col-sm-9">
+        <select class="form-control" id="recipient" name="recipient">
+            <option value="Myself">Myself</option>
+            <option value="Mother">Mother</option>
+            <option value="Son">Son</option>
+        </select>
+        <small id="recipientMessage" class="form-text text-muted" style="display: none;">If you are getting the document for yourself, you can ignore this selection.</small>
+    </div>
+</div>
+<div class="form-group row" id="recipientNameInput" style="display: none;">
+    <label for="recipientName" class="col-sm-3 col-form-label font-weight-bold">Recipient's Name:</label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="recipientIndi" placeholder="Enter recipient's name">
+    </div>
+</div>
+
 <?php
 }
 ?>
@@ -77,5 +95,24 @@ $(document).ready(function(){
         // Call the function to copy the tracking code
         copyTrackingCode();
     });
+    function toggleRecipientNameInput() {
+    const recipientValue = $('#recipient').val();
+    const recipientNameInput = $('#recipientNameInput'); // Correct selector for the div containing the input field
+    if (recipientValue === "Mother" || recipientValue === "Son") {
+        recipientNameInput.show(); // Show input field if Mother or Son is selected
+    } else {
+        recipientNameInput.hide(); // Hide input field otherwise
+    }
+}
+
+// Event listener for when the recipient dropdown changes
+$('#recipient').change(function() {
+    // Call the function to toggle recipient name input field
+    toggleRecipientNameInput();
+});
+
+// Call the function initially to set the visibility based on the default selected option
+toggleRecipientNameInput();
+
 });
 </script>

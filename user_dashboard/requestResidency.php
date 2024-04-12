@@ -11,7 +11,10 @@ $type = "Residency Certificate";
 $status = "Pending";
 $username = $_SESSION['user'];
 $email = $_SESSION['email'];
-
+$recipent=$_POST['recipent'];
+if($recipent==""){
+    $recipent="Myself";
+}
 
 // Perform input validation
 if(empty($trackingCode) || empty($fullName) || empty($pickUpDate) || empty($purpose) || empty($type) || empty($status) || empty($username)) {
@@ -20,11 +23,11 @@ if(empty($trackingCode) || empty($fullName) || empty($pickUpDate) || empty($purp
         'text' => '',
         'icon' => 'error'
     ];
-    echo 'empty';
+    // echo 'empty';
 } else {
     // Insert data into the database
-    $stmt = $conn->prepare("INSERT INTO residency (tracking_code, full_name, pickup_date, purpose, type, status, username, date_requested,email) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(),?)");
-    $stmt->bind_param("ssssssss", $trackingCode, $fullName, $pickUpDate, $purpose, $type, $status, $username,$email);
+    $stmt = $conn->prepare("INSERT INTO residency (tracking_code, full_name, pickup_date, purpose, type, status, username,email,recipent,date_requested) VALUES (?,?, ?, ?, ?, ?, ?, ?,?,NOW())");
+    $stmt->bind_param("sssssssss", $trackingCode, $fullName, $pickUpDate, $purpose, $type, $status, $username,$email,$recipent);
 
     if($stmt->execute()) {
       // echo "add";

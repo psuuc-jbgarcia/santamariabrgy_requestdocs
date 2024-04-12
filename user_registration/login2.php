@@ -12,7 +12,7 @@ if ($username == "" || $password == "") {
     //     'icon'=>'error'
     // ];
 } else {
-    $stmtAdmin = "SELECT username, passwords FROM adminaccount WHERE username = ?";
+    $stmtAdmin = "SELECT username, passwords,name FROM adminaccount WHERE username = ?";
     $stmtAdmin = $conn->prepare($stmtAdmin);
     $stmtAdmin->bind_param("s", $username);
     $stmtAdmin->execute();
@@ -21,9 +21,11 @@ if ($username == "" || $password == "") {
         // admin account validation
         $dataAdmin = $resultAdmin->fetch_assoc();
         $hashedPasswordAdmin = $dataAdmin['passwords'];
+        $name=$dataAdmin['name'];
 
         if ($password == $hashedPasswordAdmin) {
             $_SESSION['admin'] = $username;
+            $_SESSION['name'] = $name;
             echo 'Welcome admin';
 
             // $response=[

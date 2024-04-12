@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./landingpage/1708167598_download-removebg-preview.png">
+
 <style>
     a{
         text-decoration: none;color: white;
@@ -52,27 +54,29 @@
             </button>
 
      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
+     <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#trackdocs">Track Documents</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#services">Services</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#map">Map</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-white mr-2" href="user_registration/register.php" style="background-color: #006400;">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link mr-2" href="user_registration/login.php" style="background-color: #007bff; color: #fff;">Login</a>
+    </li>
+</ul>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#map">Map</a>
-                    </li>
-                </ul>
-  <div class="dropdown">
-                    <button class="btn btn-white dropdown-toggle bg-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: green;">
-                        User
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="user_registration/register.php">Register</a>
-                        <a class="dropdown-item" href="user_registration/login.php">Login</a>
-                    </div>
-                </div>
+
+  
              
             </div>
     </div>
@@ -81,7 +85,7 @@
     <div class="container mt-5" id="home">
     <div class="jumbotron hero-image position-relative" style="background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('./landingpage/backround.png'); background-repeat: no-repeat; background-size: cover; min-height: 80vh;">
         <div class="container hero-text text-center">
-            <img src="./landingpage/1708167598_download-removebg-preview.png" alt="Logo" class="img-fluid logo-image"> <!-- Add the "img-fluid" class to make the image responsive -->
+            <img src="./landingpage/logo.gif" alt="Logo" class="img-fluid logo-image" height="100px"> <!-- Add the "img-fluid" class to make the image responsive -->
             <h1 class="display-4">Welcome to Municipality of Sta Maria</h1>
             <p class="lead">Open Hours of Barangay: Monday to Friday (8AM-5PM).</p>
             <p class="lead">Email at: <a href="mailto:stamaria@gmail.com" style="text-decoration: none; color:white;">stamaria@gmail.com</a></p>
@@ -143,6 +147,34 @@
         </div>
     </section>
 
+    <div class="bg-success" style="background-color: #6c757d; padding: 0.75rem; text-align: center; margin-top: 1rem;">
+        <h4 class="text-white" id="trackdocs">TRACK YOUR DOCS</h4>
+    </div>
+    <div class="container mt-5">
+        <h1 class="mb-4" >Track Documents</h1>
+        <div id="track-docs-section" class="card" style="height: 450px;">
+            <div class="card-body">
+                <p class="card-text">Track your documents by entering the tracking ID below:</p>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter Tracking ID" id="tracking-id-input">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button" id="track-btn">Track</button>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="document-type-select">Select Document Type:</label>
+                    <!-- Apply custom styling to the select element -->
+                    <select class="form-control" id="document-type-select" style="font-size: 16px; padding: 10px; height: 50px;">
+                        <option value="business">Business Documents</option>
+                        <option value="clearance">Clearance Documents</option>
+                        <option value="indigency">Indigency Documents</option>
+                        <option value="residency">Residency Documents</option>
+                    </select>
+                </div>
+                <div id="tracking-info" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="bg-success" style="background-color: #6c757d; padding: 0.75rem; text-align: center; margin-top: 1rem;">
         <h4 class="text-white">LGU OFFICIALS</h4>
@@ -312,58 +344,7 @@
     </div>
 
  
-    <div class="bg-success" style="background-color: #6c757d; padding: 0.75rem; text-align: center; margin-top: 1rem;">
-        <h4 class="text-white">BARANGAY OFFICIALS</h4>
-    </div>
-    <div class="container">
-    <div class="row">
-        <div class="col-md-12 text-center" >
-            <div class="official">
-                <img src="./image_officials/1705868790_Simon L. Maningding2.png" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                <h5 class="font-weight-bold">HON. Simon Maningding</h5>
-                <p style="color: gray;">Barangay Chairman</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 text-center" >
-            <div class="official">
-                <img src="./image_officials/kagawad.jpg" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                <h5 class="font-weight-bold">HON. Juanito Bernardo</h5>
-                <p style="color: gray;">Barangay Kagawad</p>
-            </div>
-        </div>
-        <div class="col-md-6 text-center" >
-            <div class="official">
-                <img src="./image_officials/1704970139_number_9-webp (1) (2).jpg" alt="Another Image" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                <h5 class="font-weight-bold">Rhovie Jane Abenojar</h5>
-                <p style="color: gray;">Barangay  Kagawad</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 text-center" >
-            <div class="official">
-                <img src="./image_officials/1702911762_juanits.png" alt="Mayor" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                <h5 class="font-weight-bold">HON. Juanito Abenojar</h5>
-                <p style="color: gray;">Barangay Kagawad</p>
-            </div>
-        </div>
-        <div class="col-md-6 text-center" >
-            <div class="official">
-                <img src="./image_officials/k1.jpg" alt="Another Image" class="img-fluid rounded-circle mb-3" style="max-width: 50%;">
-                <h5 class="font-weight-bold">Juan Cruz</h5>
-                <p style="color: gray;">Barangay  Kagawad</p>
-            </div>
-        </div>
-    </div>
-  
-
-</div>
-<!-- <div class="bg-green-black p-2 text-center mb-3">
-        <h4 class="text-white">BARANGAY SK OFFICIALS</h4>
-    </div> -->
+    
 
  
     <div class="bg-success" style="background-color: #6c757d; padding: 0.75rem; text-align: center; margin-top: 1rem;">
@@ -384,7 +365,7 @@
                         <h1 class="card-title">Map Section</h1>
                         <p class="card-text"><i class="fas fa-map-marker-alt" style="color: green;"></i> Address: Municipality of Sta Maria, Barangay San Vicente, Santa Maria, Pangasinan</p>
                         <p class="card-text"><i class="fas fa-clock" style="color: green;"></i> Open Hours: Monday to Friday, 8:00 AM - 5:00 PM</p>
-                        <p class="card-text"><i class="fas fa-envelope" style="color: green;"></i> Email: <a style="color: black; " href="mailto:brgyalipangpang@gmail.com">brgyalipangpang@gmail.com</a></p>
+                        <p class="card-text"><i class="fas fa-envelope" style="color: green;"></i> Email: <a style="color: black; " href="mailto:stamaria@gmail.com">stamaria@gmail.com</a></p>
                     </div>
                 </div>
             </div>
@@ -412,8 +393,9 @@
             <div class="col-md-4">
     <h5>Contact Us</h5>
     <ul class="list-unstyled">
-    <li><i class="fas fa-envelope"></i> <a href="mailto:example@example.com" style="text-decoration: none !important;">Email: example@example.com</a></li>
-<li><i class="fas fa-phone"></i> <a href="tel:+1234567890" style="text-decoration: none !important;">Phone: +1234567890</a></li>
+    <li><i class="fas fa-envelope"></i> <a href="mailto:stamaria@gmail.com" style="text-decoration: none !important;">Email: stamaria@gmail.com</a></li>
+<li><i class="fas fa-phone"></i> <a href="tel:+1234567890" style="text-decoration: none !important;">Phone: 632-4348
+</a></li>
 
         <li><i class="fas fa-map-marker-alt"></i> Address: Municipality of Sta Maria, Barangay San Vicente, Santa Maria, Pangasinan</li>
         <li><a href="https://www.facebook.com/profile.php?id=100064137502992" style="text-decoration: none;"><i class="fab fa-facebook"></i> Facebook</a></li>
@@ -434,7 +416,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+ 
     <script>
    function proceedToService() {
     // Display SweetAlert for login prompt
@@ -455,6 +437,7 @@
 }
 
 </script>
+<script src="search.js"></script>
 <script>
 window.embeddedChatbotConfig = {
 chatbotId: "iMh1QFSwqoXcpcnI_GVuD",
