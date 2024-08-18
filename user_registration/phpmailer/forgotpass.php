@@ -73,26 +73,47 @@
     <!-- Bootstrap JS and Popper.js (if needed) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(function(){
-            $("#forgot").click(function(){
-                getEmail();
-            });
+       $(function() {
+    $("#change").click(function() {
+        change();
+    });
 
-            function getEmail(){
-                var email=$("#email").val();
-                var data={
-                    email:email
-                }
-                $.ajax({
-                    url:'forgotpassfunctionality.php',
-                    method:'post',
-                    data:data,
-                    success:function(result){
-                        // Do something with the result if needed
-                    },
-                });
+    function change() {
+        var newpass = $("#new_password").val();
+        var confirmpass = $("#confirm_password").val();
+
+        // Regular expression to check if password has at least 8 characters and 1 uppercase letter
+        var passwordRegex = /^(?=.*[A-Z]).{8,}$/;
+
+        // Check if new password meets the criteria
+        if (!passwordRegex.test(newpass)) {
+            $("#new_password").addClass('is-invalid'); // Add Bootstrap class for validation error
+            $("#new_password").siblings('.invalid-feedback').html('Password must be at least 8 characters long and contain at least one uppercase letter.'); // Show error message
+            return; // Exit function if validation fails
+        }
+
+        // Check if new password matches the confirmation password
+        if (newpass !== confirmpass) {
+            $("#confirm_password").addClass('is-invalid'); // Add Bootstrap class for validation error
+            $("#confirm_password").siblings('.invalid-feedback').html('Passwords do not match.'); // Show error message
+            return; // Exit function if validation fails
+        }
+
+        var data = {
+            newpass: newpass,
+            confirmpass: confirmpass
+        }
+        $.post("resetpass2.php", data, function(response) {
+            alert(response);
+            if (response == "Your password has been changed.") {
+                setTimeout(function() {
+                    window.location.href = "login.php";
+                }, 2000); // 2000 milliseconds delay (2 seconds)
             }
         });
+    }
+});
+
     </script>
 </body>
 

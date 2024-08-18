@@ -7,7 +7,13 @@
     <!-- Title -->
     <title>Indigency Certificate</title>
     <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="1708167598_download-removebg-preview copy 2.png" type="image/x-icon">
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/main.js"> </script>
     <!-- Styles -->
     <style>
         body {
@@ -107,17 +113,20 @@
         <!-- Content section -->
         <div class="content" style="height: 800px;">
             <!-- Indigency Certificate header -->
-            <h2 class="theme-color">INDIGENCY CERTIFICATE</h2>
-            <!-- Indigency Certificate form -->
-            <form id="indigency-form">
+<center>            <h2 class="theme-color">INDIGENCY CERTIFICATE</h2>
+</center>            <form id="indigency-form">  
+
+
+
+        
                 <!-- Form fields -->
                 <div class="form-group">
                     <label for="applicantName" class="theme-color">Applicant's Name:</label>
                     <input type="text" class="form-control" id="applicantName" required>
                 </div>
                 <div class="form-group">
-                    <label for="address" class="theme-color">Address:</label>
-                    <input type="text" class="form-control" id="address" required>
+                    <label for="address" class="theme-color">Barangay:</label>
+                    <input type="text" class="form-control" id="address" required >
                 </div>
                 <div class="form-group">
                     <label for="purpose" class="theme-color">Purpose:</label>
@@ -125,7 +134,7 @@
                 </div>
                 <div class="form-group">
                     <label for="issueDate" class="theme-color">Date Issued:</label>
-                    <input type="date" class="form-control" id="issueDate" required>
+                    <input type="text" class="form-control" id="issueDate" required>
                 </div>
                 <div class="form-group">
                     <label for="expiryDate" class="theme-color">Expiry Date:</label>
@@ -133,8 +142,9 @@
                 </div>
              
                 <button type="submit" class="btn btn-theme">Generate Indigency Certificate</button>
+ 
+      
             </form>
-
             <!-- Indigency Certificate output -->
             <div id="indigency-certificate-output" class="formal-font" style="display: none;">
                 <!-- Certificate content dynamically generated here -->
@@ -145,22 +155,48 @@
             <div class="signature">
                 <hr>
                 <center>
-                    <p class="theme-color">[Barangay Official's Signature]</p>
-                    <p class="theme-color">[Barangay Official's Name]</p>
-                    <p class="theme-color">[Barangay Position]</p>
+                <p class="theme-color">Barangay Official's Signature</p>
+                <p class="theme-color">Jerico Garia</p>
+                <p class="theme-color">Barangay Captain</p>
                 </center>
             </div>
         </div>
     </div>
+<script>  function populateForm(data) {
+        document.getElementById("applicantName").value = data.applicantName;
+        document.getElementById("address").value = data.address;
+        document.getElementById("purpose").value = data.purpose;
+        document.getElementById("issueDate").value = data.issueDate;
+        document.getElementById("expiryDate").value = data.expiryDate; // Populate expiry date
+        // Populate other form fields here
+    }
 
-    <!-- JavaScript section -->
+    // Function to handle form submission
+    document.getElementById("indigency-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        // Your form submission logic here
+    });
+
+    // AJAX request to fetch data from server
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'getdataindi.php?trackingCode=<?php echo $_GET["trackingCode"]; ?>&email=<?php echo $_GET["email"]; ?>', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            populateForm(data);
+        }
+    };
+    xhr.send();</script>
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to reset the form
         function resetForm() {
             document.getElementById("indigency-form").reset();
             document.getElementById("indigency-certificate-output").style.display = "none";
             document.getElementById("indigency-form").style.display = "block";
         }
 
+        // Function to generate the certificate and handle form submission
         document.getElementById("indigency-form").addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -178,17 +214,27 @@
             const formattedExpiryDate = expiryDateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
             // Generate the indigency certificate content
-            const indigencyCertificateContent = `
-                <br>
-                <p class="theme-color">To Whom It May Concern:</p>
-                <br>
-                <p class="theme-color">This is to certify that ${applicantName}, of legal age, residing at ${address}, is known to the undersigned to belong to an indigent family.</p>
-                <br>
-                <p class="theme-color">This certification is being issued upon the request of ${applicantName} in connection with ${purpose}. This certificate is valid from ${formattedIssueDate} until ${formattedExpiryDate}.</p>
-                <br>
-                <p class="theme-color">Issued this ${formattedIssueDate}, at Barangay Hall, [Barangay Name], [Municipality], [Province].</p>
-                <br>
-            `;
+       // Generate the indigency certificate content
+       const indigencyCertificateContent = `
+    <div>
+    <br>
+<p class="theme-color"><b>To Whom It May Concern:</b></p>
+<br>
+<p class="theme-color">This is to certify that <strong>${applicantName}</strong>, of legal age, residing at <strong>${address}</strong>, is known to the undersigned to belong to an indigent family.</p>
+<br>
+<p class="theme-color">This certification is being issued upon the request of <strong>${applicantName}</strong> in connection with <strong>${purpose}</strong>.</p>
+<p class="theme-color">This certificate is valid from <strong>${formattedIssueDate}</strong> until <strong>${formattedExpiryDate}</strong>.</p>
+<p class="theme-color">Please be informed that this Indigency Certificate is intended solely for the stated purpose and may not be used for any other purpose without proper authorization.</p>
+<p class="theme-color">Any misuse or misrepresentation of the information contained in this certificate may result in legal consequences.</p>
+<br>
+<p class="theme-color">Issued by: <strong>${applicantName}</strong></p>
+<p class="theme-color">Issued Date: <strong>${formattedIssueDate}</strong></p>
+<br>
+<br>
+
+    </div>
+`;
+
 
             // Display the indigency certificate content
             const indigencyCertificateOutput = document.getElementById("indigency-certificate-output");
@@ -199,6 +245,7 @@
             document.getElementById("indigency-form").style.display = "none";
         });
 
+        // Function to print the PDF
         function printPDF() {
             // Show the printable content
             document.getElementById("indigency-certificate-output").style.display = "block";
@@ -209,7 +256,15 @@
             // Hide the printable content again
             document.getElementById("indigency-certificate-output").style.display = "none";
         }
-    </script>
+
+        // Event listeners for reset button and download PDF button
+        document.getElementById("reset-btn").addEventListener("click", resetForm);
+        document.getElementById("download-pdf-btn").addEventListener("click", printPDF);
+    });
+</script>
+
+
+
     <center>
         <div style="margin-bottom: 50px;">
             <!-- Reset Form and Download PDF buttons -->

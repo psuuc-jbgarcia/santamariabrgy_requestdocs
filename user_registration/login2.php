@@ -1,10 +1,15 @@
 <?php
 session_start();
+
 require '../connection.php';
 $response=array();
-$stmt = "select username,passwords from users";
 $username = trim($_POST['username']);
 $password = trim($_POST['password']);
+$requestedService = isset($_POST['service']) ? $_POST['service']: 'VAT';
+
+
+
+
 if ($username == "" || $password == "") {
     echo 'Please fill up the form';
     // $response=[
@@ -54,9 +59,12 @@ if ($username == "" || $password == "") {
             $email=$dataUser['email'];
 
             if (password_verify($password, $hashedPasswordUser)) {
+
                 // Store the username in the session
                 $_SESSION['user'] = $username;
                 $_SESSION['email']=$email;
+                $_SESSION['requested_service'] =$requestedService;
+          
                 echo 'Welcome user';
                 // $response=[
                 //     'title'=>'Welcome user',

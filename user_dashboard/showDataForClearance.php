@@ -43,9 +43,15 @@ if ($result->num_rows == 1) {
     <label for="recipient" class="col-sm-3 col-form-label font-weight-bold">Recipient:</label>
     <div class="col-sm-9">
         <select class="form-control" id="recipient" name="recipient">
-            <option value="Myself">Myself</option>
+        <option value="Myself">Myself</option>
             <option value="Mother">Mother</option>
             <option value="Son">Son</option>
+            <option value="Father">Father</option>
+            <option value="Brother">Brother</option>
+            <option value="Sister">Sister</option>
+            <option value="Relatives">Relatives</option>
+            <option value="Others">Others</option>
+
         </select>
         <small id="recipientMessage" class="form-text text-muted" style="display: none;">If you are getting the document for yourself, you can ignore this selection.</small>
     </div>
@@ -99,14 +105,14 @@ if ($result->num_rows == 1) {
             copyTrackingCode();
         });
         function toggleRecipientNameInput() {
-            const recipientValue = $('#recipient').val();
-            const recipientNameInput = $('#recipientNameInput');
-            if (recipientValue === "Mother" || recipientValue === "Son") {
-                recipientNameInput.show(); // Show input field if Mother or Son is selected
-            } else {
-                recipientNameInput.hide(); // Hide input field otherwise
-            }
+        const recipientValue = $('#recipient').val();
+        const recipientNameInput = $('#recipientNameInput');
+        if (recipientValue === "Mother" || recipientValue === "Son" || recipientValue === "Father" || recipientValue === "Brother" || recipientValue === "Sister" || recipientValue === "Relatives and others") {
+            recipientNameInput.show(); // Show input field if Mother, Son, Father, Brother, Sister, or Relatives and others is selected
+        } else {
+            recipientNameInput.hide(); // Hide input field otherwise
         }
+    }
 
         // Event listener for when the recipient dropdown changes
         $('#recipient').change(function() {

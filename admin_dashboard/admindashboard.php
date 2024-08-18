@@ -34,6 +34,16 @@ $nameAdmin = $_SESSION['name'];
       background-color: white !important;
       color: #333 !important;
       /* Change text color to black */
+    }   .request-box {
+        height: 200px; /* Reduce the height of the box */
+    }
+
+    .request-box h4 {
+        font-size: 1.5rem; /* Adjust the font size of the title */
+    }
+
+    .request-box .badge {
+        font-size: 4rem; /* Make the number super big */
     }
   </style>
 
@@ -110,6 +120,12 @@ $nameAdmin = $_SESSION['name'];
             <li class="nav-item">
               <a class="nav-link" href="#payment-management-tab" data-toggle="tab"><i class="fas fa-money-bill-alt"></i> Payment Management</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#walkinform" data-toggle="tab"><i class="fas fa-walking"></i> Walk In Form Request</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#walkin" data-toggle="tab"><i class="fas fa-walking"></i> Walk In Request</a>
+            </li>
           
             <li class="nav-item">
               <a class="nav-link" href="#logs" data-toggle="tab"><i class="fas fa-check"></i>Logs</a>
@@ -142,7 +158,7 @@ $nameAdmin = $_SESSION['name'];
               <div class="col-md-6">
                 <div class="request-box bg-primary rounded p-3" data-toggle="modal" data-target="#userModal">
                   <h4><i class="fas fa-users"></i> Number of Users</h4>
-                  <span style="font-size: large;" class="badge" id="userCount"></span>
+                  <span style="font-size:50px;" class="badge" id="userCount"></span>
                 </div>
               </div>
               <!-- Modal for Number of Users -->
@@ -210,7 +226,7 @@ $nameAdmin = $_SESSION['name'];
               <div class="col-md-6">
                 <div class="request-box bg-warning rounded p-3" data-toggle="modal" data-target="#revenueModal">
                   <h4><i class="fas fa-money-bill-alt"></i> Total Revenue</h4>
-                  <span style="font-size: large;" class="badge" id="totalRevenue"></span>
+                  <span style="font-size: 50px;" class="badge" id="totalRevenue"></span>
                 </div>
               </div>
               <!-- Modal for Total Revenue -->
@@ -270,16 +286,40 @@ $nameAdmin = $_SESSION['name'];
                 </div>
               </div>
             </div>
+            <div class="row mt-3">
+    <div class="col-md-3">
+        <div class="request-box bg-primary rounded p-3" data-toggle="modal" data-target="#brgyClearanceModal">
+            <h4><i class="fas fa-file-alt"></i> Barangay Clearance Requests</h4>
+            <span style="font-size: 50px;" class="badge" id="brgyClearanceCount"></span>
+            <canvas id="brgyClearanceChart" width="400" height="100"></canvas>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="request-box bg-secondary rounded p-3" data-toggle="modal" data-target="#businessPermitModal">
+            <h4><i class="fas fa-building"></i> Business Permit Requests</h4>
+            <span style="font-size:  50px;" class="badge" id="businessPermitCount"></span>
+            <canvas id="businessPermitChart" width="400" height="100"></canvas>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="request-box bg-success rounded p-3" data-toggle="modal" data-target="#indigencyModal">
+            <h4><i class="fas fa-id-badge"></i> Indigency Certificate Requests</h4>
+            <span style="font-size: 50px;" class="badge" id="indigencyCount"></span>
+            <canvas id="indigencyChart" width="400" height="100"></canvas>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="request-box bg-danger rounded p-3" data-toggle="modal" data-target="#residencyModal">
+            <h4><i class="fas fa-home"></i> Residency Certificate Requests</h4>
+            <span style="font-size: 50px;" class="badge" id="residencyCount"></span>
+            <canvas id="residencyChart" width="400" height="100"></canvas>
+        </div>
+    </div>
+</div>
 
             <div class="row mt-3">
               <!-- Display number of requests for Barangay Clearance -->
-              <div class="col-md-6">
-                <div class="request-box bg-primary rounded p-3" data-toggle="modal" data-target="#brgyClearanceModal">
-                  <h4><i class="fas fa-file-alt"></i> Barangay Clearance Requests</h4>
-                  <span style="font-size: larger;" class="badge" id="brgyClearanceCount"></span>
-                  <canvas id="brgyClearanceChart" width="400" height="100"></canvas>
-                </div>
-              </div>
+           
               <!-- Modal for Barangay Clearance -->
               <!-- Modal for Barangay Clearance -->
               <div class="modal fade" id="brgyClearanceModal" tabindex="-1" aria-labelledby="brgyClearanceModalLabel" aria-hidden="true">
@@ -352,14 +392,7 @@ $nameAdmin = $_SESSION['name'];
 
 
 
-              <!-- Display number of requests for Business Permit -->
-              <div class="col-md-6">
-                <div class="request-box bg-secondary rounded p-3" data-toggle="modal" data-target="#businessPermitModal">
-                  <h4><i class="fas fa-building"></i> Business Permit Requests</h4>
-                  <span style="font-size: larger;" class="badge" id="businessPermitCount"></span>
-                  <canvas id="businessPermitChart" width="400" height="100"></canvas>
-                </div>
-              </div>
+             
               <!-- Modal for Business Permit -->
               <div class="modal fade" id="businessPermitModal" tabindex="-1" aria-labelledby="businessPermitModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -433,13 +466,7 @@ $nameAdmin = $_SESSION['name'];
 
             <div class="row mt-3">
               <!-- Display number of requests for Indigency Certificate -->
-              <div class="col-md-6">
-                <div class="request-box bg-success rounded p-3" data-toggle="modal" data-target="#indigencyModal">
-                  <h4><i class="fas fa-id-badge"></i> Indigency Certificate Requests</h4>
-                  <span style="font-size: larger;" class="badge" id="indigencyCount"></span>
-                  <canvas id="indigencyChart" width="400" height="100"></canvas>
-                </div>
-              </div>
+            
               <!-- Modal for Indigency Certificate -->
               <div class="modal fade" id="indigencyModal" tabindex="-1" aria-labelledby="indigencyModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -513,13 +540,7 @@ $nameAdmin = $_SESSION['name'];
               </div>
 
               <!-- Display number of requests for Residency Certificate -->
-              <div class="col-md-6">
-                <div class="request-box bg-danger rounded p-3" data-toggle="modal" data-target="#residencyModal">
-                  <h4><i class="fas fa-home"></i> Residency Certificate Requests</h4>
-                  <span style="font-size: larger;" class="badge" id="residencyCount"></span>
-                  <canvas id="residencyChart" width="400" height="100"></canvas>
-                </div>
-              </div>
+              
               <!-- Modal for Residency Certificate -->
               <div class="modal fade" id="residencyModal" tabindex="-1" aria-labelledby="residencyModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -625,13 +646,88 @@ $nameAdmin = $_SESSION['name'];
           <div class="tab-pane fade" id="business-permit-tab">
 
           </div> -->
+          
+          <div class="tab-pane fade" id="walkinform">
+
+          <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header text-dark">
+                    <h2 class="text-center"><i class="fas fa-walking text-success"></i> Walk-In Request Form</h2>
+                </div>
+                <div class="card-body">
+                    <form id="walkInForm">
+                        <div class="form-group">
+                            <label for="firstName"><i class="fas fa-user text-success"></i> First Name:</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName"><i class="fas fa-user text-success"></i> Middle Name:</label>
+                            <input type="text" class="form-control" id="middleName" name="middleName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName"><i class="fas fa-user text-success"></i> Last Name:</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactNumber"><i class="fas fa-phone text-success"></i> Contact Number:</label>
+                            <input type="tel" class="form-control" id="contactNumber" name="contactNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="visitorEmail"><i class="fas fa-envelope text-success"></i> Email:</label>
+                            <input type="email" class="form-control" id="visitorEmail" name="visitorEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="brgy"><i class="fas fa-building text-success"></i>Barangay:</label>
+                            <input type="text" class="form-control" id="brgy" name="brgy" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="documentType"><i class="fas fa-file-alt text-success"></i> Document Type:</label>
+                            <select class="form-control" id="documentType" name="documentType" required onchange="toggleFields()">
+                                <option value="">Select Document Type</option>
+                                <option value="Barangay Clearance">Barangay Clearance</option>
+                                <option value="Business Permit">Business Permit</option>
+                                <option value="Residency Certificate">Residency Certificate</option>
+                                <option value="Indigency Certificate">Indigency Certificate</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="purposeField" style="display: none;">
+                            <label for="purpose"><i class="fas fa-info-circle text-success"></i> Purpose</label>
+                            <textarea class="form-control" id="purpose" name="purpose" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group" id="occupationField" style="display: none;">
+                            <label for="occupation"><i class="fas fa-briefcase text-success"></i> Occupation:</label>
+                            <input type="text" class="form-control" id="occupation" name="occupation">
+                        </div>
+                        <div class="form-group" id="incomeField" style="display: none;">
+                            <label for="income"><i class="fas fa-money-bill text-success"></i> Income per month:</label>
+                            <input type="number" class="form-control" id="income" name="income">
+                        </div>
+                        <div class="form-group" id="businessNameField" style="display: none;">
+                            <label for="businessName"><i class="fas fa-building text-success"></i> Business Name:</label>
+                            <input type="text" class="form-control" id="businessName" name="businessName">
+                        </div>
+                        <div class="form-group" id="businessNatureField" style="display: none;">
+                            <label for="businessNature"><i class="fas fa-industry text-success"></i> Business Nature:</label>
+                            <input type="text" class="form-control" id="businessNature" name="businessNature">
+                        </div>
+
+                        <button type="button" class="btn btn-success btn-block" id="add"> Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
           <div class="tab-pane fade" id="all">
 
 
           </div>
           <div class="tab-pane fade" id="logs">
           </div>
-          <div class="tab-pane fade" id="template">
+          <div class="tab-pane fade" id="walkin">
             <h1>te</h1>
           </div>
           <!-- <div class="tab-pane fade usertab" id="user-management-tab">
@@ -860,16 +956,142 @@ $nameAdmin = $_SESSION['name'];
   <script>
     loadall();
     loadlogs();
-
+    loadSuggestions();
+    loadwalkin();
+    loadwalkin();
     function loadall() {
       $("#all").load('fetch_all.php');
     }
-
+    function loadwalkin() {
+      $("#walkinform").load('walk.php');
+    }
     function loadlogs() {
       $("#logs").load('fetch_logs.php');
     }
+    function loadSuggestions() {
+        $("#suggestions-tab").load('fetch_suggestion.php');
+    }
+    function loadwalkin () {
+$("#walkin").load("../walkin/fetch_walkin.php");
+    }
     // setInterval(loadall, 10000);
   </script>
+  <script>
+    function toggleFields() {
+        var documentType = document.getElementById("documentType").value;
+        var purposeField = document.getElementById("purposeField");
+        var occupationField = document.getElementById("occupationField");
+        var incomeField = document.getElementById("incomeField");
+        var businessNameField = document.getElementById("businessNameField");
+        var businessNatureField = document.getElementById("businessNatureField");
+        
+        if (documentType === "Barangay Clearance") {
+            purposeField.style.display = "block";
+            occupationField.style.display = "none";
+            incomeField.style.display = "none";
+            businessNameField.style.display = "none";
+            businessNatureField.style.display = "none";
+        } else if (documentType === "Business Permit") {
+            purposeField.style.display = "none";
+            businessNameField.style.display = "block";
+            businessNatureField.style.display = "block";
+            occupationField.style.display = "none";
+            incomeField.style.display = "none";
+        } else if (documentType === "Residency Certificate") {
+            purposeField.style.display = "block";
+            occupationField.style.display = "none";
+            incomeField.style.display = "none";
+            businessNameField.style.display = "none";
+            businessNatureField.style.display = "none";
+        } else if (documentType === "Indigency Certificate") {
+            purposeField.style.display = "block";
+
+            occupationField.style.display = "block";
+            incomeField.style.display = "block";
+            businessNameField.style.display = "none";
+            businessNatureField.style.display = "none";
+        } else {
+            // Hide all fields if no document type selected
+            purposeField.style.display = "none";
+            occupationField.style.display = "none";
+            incomeField.style.display = "none";
+            businessNameField.style.display = "none";
+            businessNatureField.style.display = "none";
+        }
+    }
+</script>
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+   $(function(){
+    $("#add").click(function(){
+
+        addrequest();
+    });
+    
+    function addrequest(){
+        var fname = $("#firstName").val();
+        var mname = $("#middleName").val();
+        var lname = $("#lastName").val();
+        var email = $("#visitorEmail").val();
+        var doctype = $("#documentType").val();
+        var purpose = $("#purpose").val();
+        var occupation = $("#occupation").val();
+        var income = $("#income").val();
+        var businessName = $("#businessName").val();
+        var businessNature = $("#businessNature").val();
+         var contactNumber=$("#contactNumber").val();
+         var brgy=$("#brgy").val();
+        var data = {
+            firstName: fname,
+            middleName: mname,
+            lastName: lname,
+            visitorEmail: email,
+            documentType: doctype,
+            purpose: purpose,
+            occupation: occupation,
+            income: income,
+            businessName: businessName,
+            businessNature: businessNature,
+            contactNumber:contactNumber,
+            brgy:brgy
+        };
+
+        $.ajax({
+    method: 'POST',
+    url: 'walkin_request.php',
+    data: data,
+    dataType: 'json',
+    success: function(response) {
+        if (response.icon === "success") {
+            Swal.fire({
+                icon: response.icon,
+                title: response.title,
+            });
+            $("#walkInForm")[0].reset();
+        } else {
+            Swal.fire({
+                icon: response.icon,
+                title: response.title,
+            });
+        }
+    },
+    error: function(xhr, status, error) {
+        console.log(xhr.responseText); // Debugging: Log the error response
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while processing your request.'
+        });
+    }
+});
+
+    }
+});
+
+   
+</script>
 </body>
 
 </html>

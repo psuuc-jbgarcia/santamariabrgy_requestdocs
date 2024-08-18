@@ -170,6 +170,14 @@
         function login() {
             var username = $("#username").val().trim();
             var password = $("#password").val().trim();
+const url = window.location.href;
+
+const queryString = url.split('?')[1];
+
+const params = new URLSearchParams(queryString);
+
+const service = params.has('service') ? params.get('service') : null;
+
 
             // Clear previous error styles and messages
             $(".form-group").removeClass("has-error");
@@ -202,7 +210,9 @@
             // Perform login action if all fields are filled
             var data = {
                 username: username,
-                password: password
+                password: password,
+                service:service
+                
             };
 
             $.ajax({

@@ -7,17 +7,17 @@ if(isset($_POST['newpass']) && isset($_POST['confirmpass'])) {
     $newpass = $_POST['newpass'];
     $confirmpass = $_POST['confirmpass'];
 
-    // Validate if new password matches confirm password
-    if($newpass !== $confirmpass) {
-        echo "New password and confirm password do not match.";
-        exit(); // Stop execution
-    }
+    // // Validate if new password matches confirm password
+    // if($newpass !== $confirmpass) {
+    //     echo "New password and confirm password do not match.";
+    //     exit(); // Stop execution
+    // }
 
-    // Validate password length and uppercase letter presence
-    if (strlen($newpass) < 8 || !preg_match("/[A-Z]/", $newpass)) {
-        echo "Error: Password must be at least 8 characters long and contain at least one uppercase letter.";
-        exit;
-    }
+    // // Validate password length and uppercase letter presence
+    // if (strlen($newpass) < 8 || !preg_match("/[A-Z]/", $newpass)) {
+    //     echo "Error: Password must be at least 8 characters long and contain at least one uppercase letter.";
+    //     exit;
+    // }
 
     // Hash the new password
     $hashedpassword = password_hash($newpass, PASSWORD_BCRYPT);

@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     
 <?php 
@@ -58,13 +59,16 @@ use PHPMailer\PHPMailer\Exception;
            $mail->Body = '<b>Dear ' . $username . ',</b>
            <h3>We received a request to reset your password.</h3>
            <p>Kindly click the link below to reset your password:</p>
-           http://localhost/websys2mtr/user_registration/resetpass.php
+           http://localhost/websys2mtr-r/user_registration/resetpass.php
            <br> <br>
            <p>Do not share this if you did not request it.</p>';
            
        
            $mail->send();
-           echo "<script>alert('Password reset email sent successfully.Check your email')</script>
+           echo "<script>   Swal.fire({
+            title: 'Password reset email sent successfully.Check your email',
+            icon: 'success'
+        });</script>
            ";
            header("Refresh:1;url=forgotpass.php");
        } catch (Exception $e) {
@@ -74,7 +78,7 @@ use PHPMailer\PHPMailer\Exception;
         //     icon: 'error'
         // });</script>";
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-          
+     
        }
     }
     else{

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Clearance</title>
+    <link rel="shortcut icon" href="1708167598_download-removebg-preview copy 2.png" type="image/x-icon">
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -130,7 +132,8 @@
             <br>
             <br>
             <br>
-            <h2 class="theme-color">BARANGAY CLEARANCE</h2>
+<center>            <h2 class="theme-color">BARANGAY CLEARANCE</h2>
+</center> 
             <form id="clearance-form">
                 <!-- Form fields -->
                 <div class="form-group">
@@ -148,7 +151,7 @@
                 </div>
                 <div class="form-group">
                     <label for="issueDate" class="theme-color">Issue Date:</label>
-                    <input type="date" class="form-control" id="issueDate" required>
+                    <input type="text" class="form-control" id="issueDate" required>
                 </div>
                 <div class="form-group">
                     <label for="expiryDate" class="theme-color">Expiry Date:</label>
@@ -163,9 +166,9 @@
                <div class="signature">
                 <hr>
                 <center>
-                <p class="theme-color">[Barangay Official's Signature]</p>
-                <p class="theme-color">[Barangay Official's Name]</p>
-                <p class="theme-color">[Barangay Position]</p>
+                <p class="theme-color">Barangay Official's Signature</p>
+                <p class="theme-color">Jerico Garia</p>
+                <p class="theme-color">Barangay Captain</p>
                 </center>
             </div>
         </div> 
@@ -178,6 +181,27 @@
         </div>
 
     </center>
+<script>
+    // Function to populate form fields with data
+    function populateForm(data) {
+        document.getElementById("applicantName").value = data.applicantName;
+        document.getElementById("purpose").value = data.purpose;
+        document.getElementById("barangayName").value = data.address;
+        document.getElementById("issueDate").value = data.issueDate;
+        document.getElementById("expiryDate").value = data.expiryDate;
+    }
+
+    // AJAX request to fetch data from server
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'getdataclearance.php?trackingCode=<?php echo $_GET["trackingCode"]; ?>&email=<?php echo $_GET["email"]; ?>', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            populateForm(data);
+        }
+    };
+    xhr.send();
+</script>
 
     <script>
          function resetForm() {
@@ -195,29 +219,29 @@
             const expiryDateObj = new Date(expiryDate);
             const issued = new Date(issueDate);
 
-// Format the date in a human-readable format
-const formattedIssueDate = `${issued.toLocaleDateString('en-US', { weekday: 'long' })}, ${issued.toLocaleDateString('en-US', { month: 'long' })} ${issued.getDate()}, ${issued.getFullYear()}`;
+            // Format the date in a human-readable format
+            const formattedIssueDate = `${issued.toLocaleDateString('en-US', { weekday: 'long' })}, ${issued.toLocaleDateString('en-US', { month: 'long' })} ${issued.getDate()}, ${issued.getFullYear()}`;
 
-const formattedExpiryDate = `${expiryDateObj.toLocaleDateString('en-US', { weekday: 'long' })}, ${expiryDateObj.toLocaleDateString('en-US', { month: 'long' })} ${expiryDateObj.getDate()}, ${expiryDateObj.getFullYear()}`;
+            const formattedExpiryDate = `${expiryDateObj.toLocaleDateString('en-US', { weekday: 'long' })}, ${expiryDateObj.toLocaleDateString('en-US', { month: 'long' })} ${expiryDateObj.getDate()}, ${expiryDateObj.getFullYear()}`;
             const clearanceOutput = document.getElementById("clearance-output");
             clearanceOutput.innerHTML = `
-            <br>
-            <br>
-            <br>
-                <p class="theme-color">This is to certify that <span class="font-weight-bold">${applicantName}</span>, of legal age, Filipino citizen, and a resident of  Barangay <span class="font-weight-bold">${barangayName}</span>, has personally appeared before the undersigned and has applied for a Barangay Clearance for the purpose of <span class="font-weight-bold">${purpose}</span>.</p>
-                <p class="theme-color">This Barangay Clearance is issued to attest that the said individual is of good moral character, has no pending liabilities or obligations with the barangay, and has no derogatory records within the jurisdiction of Barangay <span class="font-weight-bold">${barangayName}</span>.</p>
-                <br>
-                <br>
-                <p class="theme-color">This Barangay Clearance is issued for the purpose of ${purpose}.</p>
+    <div>
+    <br>
+<br>
+<br>
+<p class="theme-color">This is to certify that <span class="font-weight-bold">${applicantName}</span>, of legal age, Filipino citizen, and a resident of Barangay <span class="font-weight-bold">${barangayName}</span>, has personally appeared before the undersigned and has applied for a Barangay Clearance for the purpose of <span class="font-weight-bold">${purpose}</span>.</p>
+<p class="theme-color">This Barangay Clearance is issued to attest that the said individual is of good moral character, has no pending liabilities or obligations with the barangay, and has no derogatory records within the jurisdiction of Barangay <span class="font-weight-bold">${barangayName}</span>.</p>
+<p class="theme-color">The purpose of this Barangay Clearance is to ${purpose}.</p>
+<p class="theme-color">This clearance, issued on <span class="font-weight-bold">${formattedIssueDate}</span>, is valid until <span class="font-weight-bold">${formattedExpiryDate}</span>.</p>
+<p class="theme-color">Please be advised that this Barangay Clearance is intended for the specified purpose only and may not be used for any other purpose without proper authorization.</p>
+<p class="theme-color">The Barangay reserves the right to revoke or cancel this clearance in case of any misrepresentation or misuse of information.</p>
+<br>
+<p class="theme-color">Issued by: <span class="font-weight-bold">${applicantName}</span></p>
+<p class="theme-color">Issued Date: <span class="font-weight-bold">${formattedIssueDate}</span></p>
+<br>
+    </div>
+`;
 
-                <br>
-                <br>
-                <p class="theme-color">This clearance, issued on <span class="font-weight-bold">${formattedIssueDate}</span>, is valid until <span class="font-weight-bold">${formattedExpiryDate}</span>.</p>
-                <br>
-                <br>
-                <br>
-                
-               `;
             clearanceOutput.style.display = "block";
             document.getElementById("clearance-form").style.display = "none";
             
@@ -233,8 +257,8 @@ const formattedExpiryDate = `${expiryDateObj.toLocaleDateString('en-US', { weekd
             document.getElementById("clearance-output").style.display = "none";
         }
     </script>
-
  
 </body>
 
 </html>
+

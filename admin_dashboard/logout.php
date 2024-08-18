@@ -10,7 +10,6 @@ session_destroy();
 // Send a response back to the client
 $response = array(
     'status' => 'success',
-    'message' => 'Logout successful'
 );
 echo json_encode($response);
 ?>

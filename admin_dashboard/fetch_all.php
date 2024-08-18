@@ -180,7 +180,9 @@ $dataResidency = $resultResidency->get_result();
         $('#requestsTable').DataTable({
             dom: 'Bfrtip', // Specify the elements to appear in the DOM
             buttons: [
-                'pdfHtml5' // Add the PDF button
+                'pdfHtml5', // Add the PDF button
+                'excelHtml5' // Add the Excel button
+
             ]
         });
         $('.status-select').change(function() {
@@ -225,24 +227,19 @@ function generateDocument(trackingCode, email, requestType) {
     // Decode the tracking code and email parameters
     trackingCode = decodeURIComponent(trackingCode);
     email = decodeURIComponent(email);
+// Redirect to the appropriate PHP file based on the request type
+if (requestType === 'Barangay Clearance') {
+    window.open('clearance.php?trackingCode=' + trackingCode + '&email=' + email, '_blank');
+} else if (requestType === 'Business Permit') {
+    window.open('business.php?trackingCode=' + trackingCode + '&email=' + email, '_blank');
+} else if (requestType === 'Residency Certificate') {
+    window.open('residency.php?trackingCode=' + trackingCode + '&email=' + email, '_blank');
+} else if (requestType === 'Indigency Certificate') {
+    window.open('indigency.php?trackingCode=' + trackingCode + '&email=' + email, '_blank');
+} else {
+    // Handle other request types if needed
+    alert('Invalid request type');
+}
 
-    // Redirect to the appropriate PHP file based on the request type
-    if (requestType === 'Barangay Clearance') {
-        window.location.href = 'clearance.php?trackingCode=' + trackingCode + '&email=' + email;
-    } else if (requestType === 'Business Permit') {
-        window.location.href = 'business.php?trackingCode=' + trackingCode + '&email=' + email;
-    }
-    else if(requestType=="Residency Certificate"){
-        window.location.href = 'residency.php?trackingCode=' + trackingCode + '&email=' + email;
-
-    }
-    else if(requestType=="Indigency Certificate"){
-        window.location.href = 'indigency.php?trackingCode=' + trackingCode + '&email=' + email;
-
-    }
-    else {
-        // Handle other request types if needed
-        alert('Invalid request type');
-    }
 }
 </script>

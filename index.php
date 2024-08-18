@@ -90,7 +90,7 @@
             <p class="lead">Open Hours of Barangay: Monday to Friday (8AM-5PM).</p>
             <p class="lead">Email at: <a href="mailto:stamaria@gmail.com" style="text-decoration: none; color:white;">stamaria@gmail.com</a></p>
             <p class="lead">Make your requests hassle-free!</p>
-            <a href="./user_dashboard/about.php" class="btn btn-success btn-lg">About Us</a>
+            <a href="landing_about.php" class="btn btn-success btn-lg">About Us</a>
         </div>
     </div>
 </div>
@@ -107,14 +107,16 @@
         <div class="bg-dark-subtle" id="features">
             <div class="container px-4 py-5" id="custom-cards" style="margin-top: -5%">
                 <div class="row align-items-stretch g-4 py-5">
-                    <div class="col-md-6 col-lg-3 mb-4"> <!-- Adjust column size for mobile view -->
-                        <div class="card card-cover overflow-hidden text-bg-light rounded-4 shadow-lg" style="background-image: url('./landingpage/barangay-clearance.png'); background-size: 100%; background-repeat: no-repeat; min-height: 40vh;">
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"></div>
-                        </div>
-                        <h3 class="pt-2 mt-2 m-lg-3 mb-4 display-8 lh-1 fw-bold text-success text-center">Barangay Clearance</h3>
-                        <p class="pt-1 mt-1 m-lg-3 mb-4 display-15 lh-1 text-dark-emphasis text-center">View the requirements needed for Barangay Clearance and acquire online now.</p>
-                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService()">Proceed</a>
-                    </div>
+                   <!-- HTML code for the card with the "Proceed" button -->
+<div class="col-md-6 col-lg-3 mb-4">
+    <div class="card card-cover overflow-hidden text-bg-light rounded-4 shadow-lg" style="background-image: url('./landingpage/barangay-clearance.png'); background-size: 100%; background-repeat: no-repeat; min-height: 40vh;">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"></div>
+    </div>
+    <h3 class="pt-2 mt-2 m-lg-3 mb-4 display-8 lh-1 fw-bold text-success text-center">Barangay Clearance</h3>
+    <p class="pt-1 mt-1 m-lg-3 mb-4 display-15 lh-1 text-dark-emphasis text-center">View the requirements needed for Barangay Clearance and acquire online now.</p>
+    <a href="#" class="btn btn-success btn-lg btn-block"  onclick="proceedToService('BarangayClearance')">Proceed</a>
+</div>
+
 
                     <div class="col-md-6 col-lg-3 mb-4"> <!-- Adjust column size for mobile view -->
                         <div class="card card-cover overflow-hidden text-bg-light rounded-4 shadow-lg" style="background-image: url('./landingpage/barangay-permit.png'); background-size: 100%; background-repeat: no-repeat; min-height: 40vh;">
@@ -122,7 +124,7 @@
                         </div>
                         <h3 class="pt-2 mt-2 m-lg-3 mb-4 display-8 lh-1 fw-bold text-success text-center">Barangay Permit</h3>
                         <p class="pt-1 mt-1 m-lg-3 mb-4 display-15 lh-1 text-dark-emphasis text-center">View the requirements needed for Business Permit and acquire online now.</p>
-                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService()">Proceed</a>
+                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService('BusinessPermit')">Proceed</a>
                     </div>
 
                     <div class="col-md-6 col-lg-3 mb-4"> <!-- Adjust column size for mobile view -->
@@ -131,7 +133,7 @@
                         </div>
                         <h3 class="pt-2 mt-2 m-lg-3 mb-4 display-8 lh-1 fw-bold text-success text-center">Indigency Certificate</h3>
                         <p class="pt-1 mt-1 m-lg-3 mb-4 display-15 lh-1 text-dark-emphasis text-center">View the requirements needed for Indigency Request and acquire online now.</p>
-                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService()">Proceed</a>
+                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService('IndigencyCertificate')">Proceed</a>
                     </div>
 
                     <div class="col-md-6 col-lg-3 mb-4"> <!-- Adjust column size for mobile view -->
@@ -140,7 +142,7 @@
                         </div>
                         <h3 class="pt-2 mt-2 m-lg-3 mb-4 display-8 lh-1 fw-bold text-success text-center">Residency Certificate</h3>
                         <p class="pt-1 mt-1 m-lg-3 mb-4 display-15 lh-1 text-dark-emphasis text-center">View the requirements needed for Recidency Certificate and acquire online now.</p>
-                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService()">Proceed</a>
+                        <a href="#" class="btn btn-success btn-lg btn-block" onclick="proceedToService('ResidencyCertificate')">Proceed</a>
                     </div>
                 </div>
             </div>
@@ -418,7 +420,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
     <script>
-   function proceedToService() {
+   function proceedToService(service) {
     // Display SweetAlert for login prompt
     Swal.fire({
         title: "Login Required",
@@ -430,8 +432,12 @@
         dangerMode: true,
     }).then((result) => {
         if (result.isConfirmed) {
-            // Redirect user to login page (replace "login.php" with your actual login page)
-            window.location.href = "./user_registration/login.php";
+      
+window.location.href = "./user_registration/login.php?service=" + service;
+
+
+
+
         }
     });
 }

@@ -269,9 +269,7 @@
         </div>
     </div>
 
-    <script src="register.js">
 
-    </script>
     <script>
         // Function to skip taking a picture and proceed to registration
         $('#skipPicture').click(function() {
@@ -316,6 +314,12 @@
             var password = $('#password').val().trim();
             if (!password) {
                 $('#password-error').text('Please enter your password');
+                $('#password').addClass('error');
+                isValid = false;
+            } 
+            
+             if (password.length < 8 || !(/[A-Z]/.test(password))) {
+                $('#password-error').text('Password must be at least 8 characters long and contain at least one uppercase letter');
                 $('#password').addClass('error');
                 isValid = false;
             }
@@ -374,6 +378,9 @@
             return emailRegex.test(email);
         }
     </script>
+        <script src="register.js">
+
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

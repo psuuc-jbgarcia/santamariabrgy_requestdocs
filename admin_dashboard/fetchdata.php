@@ -64,4 +64,5 @@ $conn->close();
 // Send the data as JSON
 header('Content-Type: application/json');
 echo json_encode($request_counts);
+
 ?>

@@ -13,10 +13,9 @@ $(function(){
             success: function(response){
                 if(response.status === 'success'){
                     // Redirect to the login page after successful logout
-                    alert(response.message);
                     window.location.href = "../index.php";
                 } else {
-                    alert("Error: " + response.message);
+                    // alert("Error: " + response.message);
                 }
             },
             error: function(xhr, status, error){

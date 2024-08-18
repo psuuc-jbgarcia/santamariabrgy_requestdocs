@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,6 +105,26 @@ right: -8px;
 bottom: 0;
 }
 }
+.table-container {
+    background-color: #dff0d8;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.table-row {
+    display: flex;
+}
+
+.header {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.table-cell {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    flex: 1;
+}
 
 
     </style>
@@ -177,7 +197,107 @@ bottom: 0;
     </div>
 </nav>
 
-    <div class="container">
+
+
+<br>
+<?php
+require '../connection.php';
+
+// Function to fetch data and display in a table
+function displayDataInTable($result, $title) {
+    echo "<style> #body{
+        style='display: none;
+    }
+        </style>";
+    echo "<h2>$title:</h2>";
+    echo "<div class='table-container'>";
+    echo "<div class='table-row header'>";
+    echo "<div class='table-cell'>Name</div>";
+    echo "<div class='table-cell'>Type</div>";
+    echo "<div class='table-cell'>Status</div>";
+    echo "</div>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<div class='table-row'>";
+        echo "<div class='table-cell'>" . $row['Name'] . "</div>";
+        echo "<div class='table-cell'>" . $row['Type'] . "</div>";
+        echo "<div class='table-cell'>" . $row['Status'] . "</div>";
+        echo "</div>";
+    }
+    echo "</div>";
+    echo "</div>";
+}
+
+
+// Check if the tracking code is passed in the URL
+if (isset($_GET['tracking_code'])) {
+    $trackingCode = $_GET['tracking_code'];
+
+    // Check if the user is logged in
+    if (isset($_SESSION['user'])) {
+        $username = $_SESSION['user'];
+
+        // Prepare and execute the SQL queries to fetch data for the tracking code from all tables
+        $stmt1 = $conn->prepare("SELECT full_name AS Name, type AS Type, status AS Status FROM residency WHERE username=? AND tracking_code=?");
+        $stmt1->bind_param("ss", $username, $trackingCode);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
+        
+        $stmt2 = $conn->prepare("SELECT business_owner_full_name AS Name, type AS Type, status AS Status FROM permits WHERE username=? AND tracking_code=?");
+        $stmt2->bind_param("ss", $username, $trackingCode);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+        
+        $stmt3 = $conn->prepare("SELECT fullname AS Name, type AS Type, status AS Status FROM clearance WHERE username=? AND tracking_code=?");
+        $stmt3->bind_param("ss", $username, $trackingCode);
+        $stmt3->execute();
+        $result3 = $stmt3->get_result();
+        
+        $stmt4 = $conn->prepare("SELECT full_name AS Name, type AS Type, status AS Status FROM certificates WHERE username=? AND tracking_code=?");
+        $stmt4->bind_param("ss", $username, $trackingCode);
+        $stmt4->execute();
+        $result4 = $stmt4->get_result();
+        
+        // Display the results in tables
+        if ($result1->num_rows > 0) {
+            displayDataInTable($result1, "Residency");
+        } else {
+        }
+        
+        if ($result2->num_rows > 0) {
+            displayDataInTable($result2, "Permits");
+        } else {
+        }
+        
+        if ($result3->num_rows > 0) {
+            displayDataInTable($result3, "Clearance");
+        } else {
+        }
+        
+        if ($result4->num_rows > 0) {
+            displayDataInTable($result4, "Certificates");
+        } else {
+        }
+        
+        // Close prepared statements
+        $stmt1->close();
+        $stmt2->close();
+        $stmt3->close();
+        $stmt4->close();
+        
+    } else {
+        // If the user is not logged in, display a message
+        echo "<p>User is not logged in.</p>";
+    }
+} else {
+    // If the tracking code is not passed in the URL, display a message
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
+    <div class="container" id="body">
         <div class="col-md-12">
         </div>
         <!-- Navigation Link Wrapped in a Card -->
@@ -205,6 +325,14 @@ bottom: 0;
         <!-- Barangay Clearance Requests Container -->
         <div id="barangay-clearance-container">
             <h2>Barangay Clearance Requests</h2>
+    <div class="row">
+        <div class="col">
+            <label for="min-clearance">From:</label>
+            <input type="date" id="min-clearance" name="min-clearance">
+            <label for="max-clearance">To:</label>
+            <input type="date" id="max-clearance" name="max-clearance">
+        </div>
+    </div>
             <table id="barangay-clearance-table" class="display">
                 <thead>
                     <tr>
@@ -228,6 +356,14 @@ bottom: 0;
         <!-- Barangay Permit Requests Container -->
         <div id="barangay-permit-container">
             <h2>Business Permit Requests</h2>
+            <div class="row">
+        <div class="col">
+            <label for="min-permit">From:</label>
+            <input type="date" id="min-permit" name="min-permit">
+            <label for="max-permit">To:</label>
+            <input type="date" id="max-permit" name="max-permit">
+        </div>
+    </div>
             <table id="barangay-permit-table" class="display">
                 <thead>
                     <tr>
@@ -252,6 +388,14 @@ bottom: 0;
         <!-- Indigency Certificate Requests Container -->
         <div id="indigency-certificate-container">
             <h2>Indigency Certificate Requests</h2>
+            <div class="row">
+        <div class="col">
+            <label for="min-indigency">From:</label>
+            <input type="date" id="min-indigency" name="min-indigency">
+            <label for="max-indigency">To:</label>
+            <input type="date" id="max-indigency" name="max-indigency">
+        </div>
+    </div>
             <table id="indigency-certificate-table" class="display">
                 <thead>
                     <tr>
@@ -275,6 +419,14 @@ bottom: 0;
         <!-- Residency Certificate Requests Container -->
         <div id="residency-certificate-container">
             <h2>Residency Certificate Requests</h2>
+            div class="row">
+        <div class="col">
+            <label for="min-residency">From:</label>
+            <input type="date" id="min-residency" name="min-residency">
+            <label for="max-residency">To:</label>
+            <input type="date" id="max-residency" name="max-residency">
+        </div>
+    </div>
             <table id="residency-certificate-table" class="display">
                 <thead>
                     <tr>
@@ -446,7 +598,58 @@ bottom: 0;
                     residencyTable = $('#residency-certificate-table').DataTable();
                 }
             });
+  // Add date range filtering
+  $('#min-clearance, #max-clearance').change(function() {
+        var min = $('#min-clearance').val();
+        var max = $('#max-clearance').val();
 
+        clearanceTable.draw();
+
+        if (min === "" && max === "") {
+            clearanceTable.search('').columns().search('').draw();
+        } else {
+            clearanceTable.columns(5).search(min + '|' + max, true, false).draw();
+        }
+    });
+
+    $('#min-permit, #max-permit').change(function() {
+        var min = $('#min-permit').val();
+        var max = $('#max-permit').val();
+
+        permitTable.draw();
+
+        if (min === "" && max === "") {
+            permitTable.search('').columns().search('').draw();
+        } else {
+            permitTable.columns(5).search(min + '|' + max, true, false).draw();
+        }
+    });
+
+    $('#min-indigency, #max-indigency').change(function() {
+        var min = $('#min-indigency').val();
+        var max = $('#max-indigency').val();
+
+        indigencyTable.draw();
+
+        if (min === "" && max === "") {
+            indigencyTable.search('').columns().search('').draw();
+        } else {
+            indigencyTable.columns(4).search(min + '|' + max, true, false).draw();
+        }
+    });
+
+    $('#min-residency, #max-residency').change(function() {
+        var min = $('#min-residency').val();
+        var max = $('#max-residency').val();
+
+        residencyTable.draw();
+
+        if (min === "" && max === "") {
+            residencyTable.search('').columns().search('').draw();
+        } else {
+            residencyTable.columns(4).search(min + '|' + max, true, false).draw();
+        }
+    });
 
         });
     </script>

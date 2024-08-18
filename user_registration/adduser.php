@@ -26,15 +26,15 @@ if (empty($username) || empty($email) || empty($password)||empty($fname)||empty(
     echo "Error: All fields are required.";
     exit;
 }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "Invalid email format.";
-    exit(); // Stop further execution
-}
-// Check if username and password match
-if ($password !== $cpass) {
-    echo "Error: Passwords do not match.";
-    exit;
-}
+// if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//     echo "Invalid email format.";
+//     exit(); // Stop further execution
+// }
+// // Check if username and password match
+// if ($password !== $cpass) {
+//     echo "Error: Passwords do not match.";
+//     exit;
+// }
 
 // Check if email is already registered
 $emailCheckStmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
@@ -47,11 +47,11 @@ if ($emailCheckResult->num_rows > 0) {
     exit;
 }
 
-// Password validation
-if (strlen($password) < 8 || !preg_match("/[A-Z]/", $password)) {
-    echo "Error: Password must be at least 8 characters long and contain at least one uppercase letter.";
-    exit;
-}
+// // Password validation
+// if (strlen($password) < 8 || !preg_match("/[A-Z]/", $password)) {
+//     echo "Error: Password must be at least 8 characters long and contain at least one uppercase letter.";
+//     exit;
+// }
 
 // Check if username is already taken in the users table
 $usernameCheckStmt = $conn->prepare("SELECT * FROM users WHERE username = ?");

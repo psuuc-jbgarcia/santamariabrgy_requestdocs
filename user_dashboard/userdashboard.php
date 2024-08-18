@@ -443,7 +443,7 @@ if (!$_SESSION['user']) {
                             <h1 class="card-title">Map Section</h1>
                             <p class="card-text"><i class="fas fa-map-marker-alt" style="color: green;"></i> Address: Municipality of Sta Maria, Barangay San Vicente, Santa Maria, Pangasinan</p>
                             <p class="card-text"><i class="fas fa-clock" style="color: green;"></i> Open Hours: Monday to Friday, 8:00 AM - 5:00 PM</p>
-                            <p class="card-text"><i class="fas fa-envelope" style="color: green;"></i> Email: <a style="text-decoration: none; color:black;" href="mailto:brgyalipangpang@gmail.com">brgyalipangpang@gmail.com</a></p>
+                            <p class="card-text"><i class="fas fa-envelope" style="color: green;"></i> Email: <a style="text-decoration: none; color:black;" href="mailto:stamaria@gmail.com">stamaria@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -472,7 +472,7 @@ if (!$_SESSION['user']) {
                 <div class="col-md-4">
                     <h5>Contact Us</h5>
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:example@example.com" class="text-decoration-none">Email: example@example.com</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:stamaria@gmail.com" class="text-decoration-none">Email: stamaria@gmail.com</a></li>
                         <li><i class="fas fa-phone"></i> <a href="tel:+1234567890" class="text-decoration-none">Phone: +1234567890</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Address: Municipality of Sta Maria, Barangay San Vicente, Santa Maria, Pangasinan</li>
                         <li><a href="https://www.facebook.com/profile.php?id=100064137502992" class="text-decoration-none"><i class="fab fa-facebook"></i> Facebook</a></li>
@@ -508,7 +508,7 @@ if (!$_SESSION['user']) {
                     <!-- load by jquery -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="d">Close</button>
                     <button type="button" class="btn btn-success" id="requestClerance">Request</button>
                 </div>
             </div>
@@ -529,7 +529,7 @@ if (!$_SESSION['user']) {
                     <!-- load by jquery -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="a">Close</button>
                     <button type="button" class="btn btn-success" id="requestPermit">Request</button>
                 </div>
             </div>
@@ -552,7 +552,7 @@ if (!$_SESSION['user']) {
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="b">Close</button>
                     <button type="button" class="btn btn-success" id="indigency">Request</button>
                 </div>
             </div>
@@ -573,13 +573,41 @@ if (!$_SESSION['user']) {
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="c">Close</button>
                     <button type="button" class="btn btn-success" id="residency">Request</button>
                 </div>
             </div>
         </div>
     </div>
+<?php 
+      if (isset($_SESSION['requested_service'])) {
+        $requestedService = $_SESSION['requested_service'];
+        // echo "<script>alert('$requestedService')</script>";
+    
+        // Display modal based on requested service
+        if ($requestedService === 'BarangayClearance') {
+            echo "<script>$('#serviceModal').modal('show');</script>";
+        }
+        if ($requestedService === 'BusinessPermit') {
+            echo "<script>$('#permitModal').modal('show');</script>";
+        }
+        if ($requestedService === 'IndigencyCertificate') {
+            echo "<script>$('#indigencyModal').modal('show');</script>";
+        }
+        if ($requestedService === 'ResidencyCertificate') {
+            echo "<script>$('#residencyModal').modal('show');</script>";
+        }
+        // Add similar checks for other services if needed
+    }
+ 
+?>
+<script>
+    $(".btn-secondary").click(function(){
+location.reload();
+    });
 
+    
+</script>
     <script>
         function proceedToService(serviceName) {
             // Check if the service is Barangay Clearance
@@ -691,7 +719,11 @@ if (!$_SESSION['user']) {
                         console.log(response)
                         if (response.icon == "success") {
                             $('#serviceModal').modal('hide');
+                            setInterval(function(){
+    location.reload();
 
+},2000);
+         
                         }
 
 
@@ -733,7 +765,11 @@ if (!$_SESSION['user']) {
                         });
                         if (response.icon == "success") {
                             $('#permitModal').modal('hide');
+                            setInterval(function(){
+    location.reload();
 
+},2000);
+         
                         }
                     }
                 });
@@ -777,7 +813,11 @@ if (!$_SESSION['user']) {
                         });
                         if (response.icon == "success") {
                             $("#indigencyModal").modal('hide');
+                            setInterval(function(){
+    location.reload();
 
+},2000);
+         
                         }
                     },
                 });
@@ -818,7 +858,10 @@ if (!$_SESSION['user']) {
                         });
                         if (response.icon == "success") {
                             $("#residencyModal").modal('hide');
+setInterval(function(){
+    location.reload();
 
+},2000);
                         }
                     },
                     error: function(xhr, status, error) {

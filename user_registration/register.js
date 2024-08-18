@@ -130,8 +130,10 @@ var imageDataURL=null;
                 data: data,
                 success: function(response) {
                     if (response === 'Registered Successfully') {
+
                         setTimeout(function() {
                             window.location.href = "form.php";
+
                         }, 1000);
                     } 
                 },

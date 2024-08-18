@@ -329,7 +329,7 @@ if (isValid) {
 
       if (result === "You have successfully filled up the form") {
         setInterval(function(){
-
+window.location.href="../user_dashboard/userdashboard.php";
         },1000)
       }
     },
@@ -338,7 +338,6 @@ if (isValid) {
 }
 });
   </script>
-  <script src="forms.js"></script>
 </body>
 
 </html>

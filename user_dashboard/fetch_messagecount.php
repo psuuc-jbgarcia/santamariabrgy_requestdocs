@@ -1,8 +1,10 @@
-<?php  
+<?php 
+session_start();
+$email=isset($_SESSION['email'])?$_SESSION['email']:""; 
 require '../connection.php'; 
 
 // Fetch count of unread notifications from the database
-$stmt = "SELECT COUNT(*) AS unread_count FROM notifications WHERE is_read = 0";
+$stmt = "SELECT COUNT(*) AS unread_count FROM notifications WHERE is_read = 0 and user_email='$email'";
 $result = $conn->query($stmt);
 
 // Check if the query was successful

@@ -15,8 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
-            background: linear-gradient(to top, rgba(0,0,0,4), rgba(0,0,0,0.5)), url('../user_registration/bg1.jpg') no-repeat center center fixed;
-
+            background: linear-gradient(to top, rgba(0, 0, 0, 4), rgba(0, 0, 0, 0.5)), url('../user_registration/bg1.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -67,6 +66,10 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
+
+        .is-invalid {
+            border-color: red !important;
+        }
     </style>
 </head>
 
@@ -89,6 +92,7 @@
                                         <i class="fa fa-eye"></i>
                                     </div>
                                 </div>
+                                <div class="error-message" id="new-password-error" style="color: red;"></div>
                             </div>
                             <div class="form-group">
                                 <label for="confirm_password">Confirm New Password</label>
@@ -98,6 +102,7 @@
                                         <i class="fa fa-eye"></i>
                                     </div>
                                 </div>
+                                <div class="error-message" id="confirm-password-error" style="color: red;"></div>
                             </div>
                             <button type="button" class="btn btn-green btn-block" id="change">Change Password</button>
                         </form>
@@ -106,6 +111,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         function togglePassword(inputId) {
@@ -120,31 +126,66 @@
                 eyeIcon.className = 'fa fa-eye';
             }
         }
-    </script>
-    <script>
-        $(function () {
-            $("#change").click(function () {
+
+        $(function() {
+            $("#change").click(function() {
                 change();
             });
 
             function change() {
                 var newpass = $("#new_password").val();
                 var confirmpass = $("#confirm_password").val();
-                var data = {
-                    newpass: newpass,
-                    confirmpass: confirmpass
-                }
-                $.post("resetpass2.php", data, function (response) {
-                    alert(response);
-                    if(response=="Your password has been changed."){
-                        setTimeout(function(){
-    window.location.href = "login.php";
-}, 2000); // 2000 milliseconds delay (2 seconds)
+                var isValid = true;
 
+                // Regular expression to check if password has at least 8 characters and 1 uppercase letter
+                var passwordRegex = /^(?=.*[A-Z]).{8,}$/;
+
+                // Reset error messages
+                $("#new-password-error").text('');
+                $("#confirm-password-error").text('');
+
+                // Check if new password meets the criteria
+                if (!passwordRegex.test(newpass)) {
+                    $("#new_password").addClass('is-invalid'); // Add Bootstrap class for validation error
+                    $("#new-password-error").text('Password must be at least 8 characters long and contain at least one uppercase letter.');
+                    isValid = false;
+                } else {
+                    $("#new_password").removeClass('is-invalid'); // Remove Bootstrap class for validation error
                 }
-                });
+
+                // Check if new password matches the confirmation password
+                if (newpass !== confirmpass) {
+                    $("#confirm_password").addClass('is-invalid'); // Add Bootstrap class for validation error
+                    $("#confirm-password-error").text('Passwords do not match.');
+                    isValid = false;
+                } else {
+                    $("#confirm_password").removeClass('is-invalid'); // Remove Bootstrap class for validation error
+                }
+
+                // Check if both passwords are not empty
+                if (!newpass || !confirmpass) {
+                    $("#new-password-error").text('Please enter both passwords.');
+                    $("#confirm-password-error").text('Please enter both passwords.');
+                    $("#new_password").addClass('is-invalid'); // Add Bootstrap class for validation error
+                    $("#confirm_password").addClass('is-invalid'); // Add Bootstrap class for validation error
+                    isValid = false;
+                }
+
+                // If both passwords are valid and match, proceed with password change
+                if (isValid) {
+                    var data = {
+                        newpass: newpass,
+                        confirmpass: confirmpass
+                    };
+                    $.post("resetpass2.php", data, function(response) {
+                        if (response == "Your password has been changed.") {
+                            setTimeout(function() {
+                                window.location.href = "login.php";
+                            }, 2000); // 2000 milliseconds delay (2 seconds)
+                        }
+                    });
+                }
             }
-
         });
     </script>
 </body>

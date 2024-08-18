@@ -216,24 +216,39 @@ function insertLogEntry($conn, $trackingCode, $newStatus, $requestType, $email)
         $type = "Barangay Clearance";
     } else if ($requestType == "permits") {
         $type = "Business Permit";
-    } else if ($requestType == "certificate") {
+    } else if ($requestType == "certificates") {
         $type = "Indigency Certificates";
     } else if ($requestType == "residency") {
         $type = "Residency Certificate";
     }
     $adminName = $_SESSION['name'];
     $timestamp = date('Y-m-d H:i:s');
+    $notificationMessage = "Your $type document request with tracking code $trackingCode is now $newStatus.";
+
+    // Check if the same notification message already exists
+    $stmtCheck = "SELECT * FROM notifications WHERE user_email=? AND message=?";
+    $checkResult = $conn->prepare($stmtCheck);
+    $checkResult->bind_param("ss", $email, $notificationMessage);
+    $checkResult->execute();
+    $checkResult->store_result();
+
+    if ($checkResult->num_rows == 0) {
+        // If no duplicate notification found, proceed with inserting the notification
+        $stmtNotif = "INSERT INTO notifications (user_email, message, created_at) VALUES (?, ?, ?)";
+        $insertNotif = $conn->prepare($stmtNotif);
+        $insertNotif->bind_param("sss", $email, $notificationMessage, $timestamp);
+        $insertNotif->execute();
+        $insertNotif->close(); // Close the prepared statement
+    }
+
+    $checkResult->close(); // Close the prepared statement for checking duplicates
+
+    // Insert the log entry regardless of the notification status
     $stmt = "INSERT INTO document_logs (tracking_code, new_status, request_type, admin_name, timestamp,email) VALUES (?, ?, ?, ?, ?, ?)";
     $insertResult = $conn->prepare($stmt);
     $insertResult->bind_param("ssssss", $trackingCode, $newStatus, $type, $adminName, $timestamp, $email);
     $insertResult->execute();
-    $notificationMessage = "Your $type document request with tracking code $trackingCode is now $newStatus.";
-
-    // Prepare the SQL statement to insert the notification
-    $stmtNotif = "INSERT INTO notifications (user_email, message, created_at) VALUES (?, ?, ?)";
-    $insertNotif = $conn->prepare($stmtNotif);
-    $insertNotif->bind_param("sss", $email, $notificationMessage, $timestamp);
-    $insertNotif->execute();
-    $insertNotif->close(); // Close the prepared statement
+    $insertResult->close(); // Close the prepared statement
 }
+
 

@@ -7,7 +7,11 @@
     <!-- Title -->
     <title>Residency Certificate</title>
     <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="1708167598_download-removebg-preview copy 2.png" type="image/x-icon">
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- jspdf library -->
     <!-- Styles -->
     <style>
@@ -106,39 +110,72 @@
         </div>
         <hr>
         <!-- Content section -->
-        <div class="content" style="height: 800px;">
+        <div class="content" style="height: 1100px;">
             <br>
             <br>
             <br>
             <br>
-            <!-- Residency Certificate header -->
-            <h2 class="theme-color">RESIDENCY CERTIFICATE</h2>
-            <!-- Residency Certificate form -->
+
+<center>            <h2 class="theme-color">RESIDENCY CERTIFICATE</h2>
+</center>            <!-- Residency Certificate header -->
+<?php 
+require '../connection.php';
+$tracking_code=$_GET['trackingCode'];
+$email=$_GET['email'];
+
+$stmt="select * from residency where tracking_code=?";
+$result=$conn->prepare($stmt);
+$result->bind_param('s',$tracking_code);
+$result->execute();
+$result=$result->get_result();
+
+if($result->num_rows>0){
+    $data=$result->fetch_assoc();
+
+    $stmtBRGY="select * from users where email=?";
+    $resultBRGY=$conn->prepare($stmtBRGY);
+    $resultBRGY->bind_param('s',$email);
+    $resultBRGY->execute();
+    $resultBRGY=$resultBRGY->get_result();
+    if($resultBRGY->num_rows>0){
+        $brgy=$resultBRGY->fetch_assoc();
+   
+    ?>
+
             <form id="residency-form">
-    <!-- Form fields -->
+
     <div class="form-group">
         <label for="applicantName" class="theme-color">Applicant's Name:</label>
-        <input type="text" class="form-control" id="applicantName" required>
+        <input type="text" class="form-control" id="applicantName" required value="<?php echo $data['full_name'] ?>">
     </div>
     <div class="form-group">
+       
+       
         <label for="barangayName" class="theme-color">Barangay Name:</label>
-        <input type="text" class="form-control" id="barangayName" required>
+        <input type="text" class="form-control" id="barangayName" required value="<?php echo $brgy['barangay'] ?>">
     </div>
+  
     <div class="form-group">
                     <label for="purpose" class="theme-color">Purpose:</label>
-                    <input type="text" class="form-control" id="purpose" required>
+                    <input type="text" class="form-control" id="purpose" required value="<?php echo $data['purpose'] ?>">
                 </div>
     <div class="form-group">
         <label for="issueDate" class="theme-color">Date Issued:</label>
-        <input type="date" class="form-control" id="issueDate" required>
+        <input type="datetime-local" class="form-control" id="issueDate" required value="<?php echo $data['date_requested'] ?>">
     </div>
     <div class="form-group">
+    <?php
+       $issueDate = $data['date_requested']; // Assuming the issued date is stored in 'date_requested' column
+       $expiryDate = date('Y-m-d', strtotime('+6 months', strtotime($issueDate)));
+            ?>
         <label for="expiryDate" class="theme-color">Expiry Date:</label>
-        <input type="date" class="form-control" id="expiryDate" required>
+        <input type="date" class="form-control" id="expiryDate" required  value="<?php echo $expiryDate  ?>">
     </div>
     <button type="submit" class="btn btn-theme">Generate Residency Certificate</button>
 </form>
-
+<?php
+} }
+?>
             <!-- Residency Certificate output -->
             <div id="residency-certificate-output" class="formal-font" style="display: none;">
                 <!-- Certificate content dynamically generated here -->
@@ -150,9 +187,9 @@
             <div class="signature">
                 <hr>
                 <center>
-                <p class="theme-color">[Barangay Official's Signature]</p>
-                <p class="theme-color">[Barangay Official's Name]</p>
-                <p class="theme-color">[Barangay Position]</p>
+                <p class="theme-color">Barangay Official's Signature</p>
+                <p class="theme-color">Jerico Garia</p>
+                <p class="theme-color">Barangay Captain</p>
                 </center>
             </div>
         </div>
@@ -185,20 +222,30 @@
 
         // Generate the residency certificate content
         const residencyCertificateContent = `
-            <!-- Certificate content -->
-            <br>
-            <br>
-            <p class="theme-color">This is to certify that <span class="font-weight-bold">${applicantName}</span>, a resident of Barangay <span class="font-weight-bold">${barangayName}</span>, has been issued a Residency Certificate.</p>
-            <br>
-            <p class="theme-color">This certificate is being issued to confirm that the individual has been residing in the aforementioned Barangay and has met all residency requirements.</p>
-            <br>
-            <p class="theme-color">This Residency Certificate is valid from <span class="font-weight-bold">${formattedIssueDate}</span> to <span class="font-weight-bold">${formattedExpiryDate}</span>.</p>
-            <br>
-            <br>
-<p class="theme-color">Purpose of Residency Certificate: <span class="font-weight-bold">${purpose}</span>.</p>
+    <!-- Certificate content -->
+    <div>
+    <br>
+<br>
+<p class="theme-color">This is to certify that <span class="font-weight-bold">${applicantName}</span>, a resident of Barangay <span class="font-weight-bold">${barangayName}</span>, has been issued a Residency Certificate.</p>
+<br>
+<p class="theme-color">This certificate is being issued to confirm that the individual has been residing in the aforementioned Barangay and has met all residency requirements.</p>
+<br>
+<p class="theme-color">This Residency Certificate is valid from <span class="font-weight-bold">${formattedIssueDate}</span> to <span class="font-weight-bold">${formattedExpiryDate}</span>.</p>
+<br>
+<p class="theme-color">The purpose of issuing this Residency Certificate is to certify the residency status of <span class="font-weight-bold">${applicantName}</span> for the purpose of <span class="font-weight-bold">${purpose}</span>.</p>
+<br>
+<p class="theme-color">Please be informed that this Residency Certificate is intended solely for the stated purpose and may not be used for any other purpose without proper authorization.</p>
+<p class="theme-color">Any misuse or misrepresentation of the information contained in this certificate may result in legal consequences.</p>
+<br>
+<br>
+<p class="theme-color">Issued by: <span class="font-weight-bold">${applicantName}</span></p>
+<p class="theme-color">Issued Date: <span class="font-weight-bold">${formattedIssueDate}</span></p>
+<br>
 <br>
 
-        `;
+    </div>
+`;
+
 
         // Display the residency certificate content
         const residencyCertificateOutput = document.getElementById("residency-certificate-output");

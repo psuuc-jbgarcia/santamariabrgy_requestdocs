@@ -42,10 +42,16 @@ if ($result->num_rows == 1) {
     <div class="form-group row">
     <label for="recipient" class="col-sm-3 col-form-label font-weight-bold">Recipient:</label>
     <div class="col-sm-9">
-        <select class="form-control" id="recipient" name="recipient">
-            <option value="Myself">Myself</option>
-            <option value="Mother">Mother</option>
-            <option value="Son">Son</option>
+        <select class="form-control" id="recipient3" name="recipient">
+        <option value="Myself">Myself</option>
+
+<option value="Mother">Mother</option>
+<option value="Son">Son</option>
+<option value="Father">Father</option>
+<option value="Brother">Brother</option>
+<option value="Sister">Sister</option>
+<option value="Relatives">Relatives</option>
+<option value="Others">Others</option>
         </select>
         <small id="recipientMessage" class="form-text text-muted" style="display: none;">If you are getting the document for yourself, you can ignore this selection.</small>
     </div>
@@ -88,17 +94,17 @@ $(document).ready(function(){
 
     // Function to toggle recipient name input field visibility
     function toggleRecipientNameInput() {
-        const recipientValue = $('#recipient').val();
+        const recipientValue = $('#recipient3').val();
         const recipientNameInput = $('#recipientNameInput'); // Correct selector for the div containing the input field
-        if (recipientValue === "Mother" || recipientValue === "Son") {
-            recipientNameInput.show(); // Show input field if Mother or Son is selected
+        if (recipientValue === "Mother" || recipientValue === "Son" || recipientValue === "Father" || recipientValue === "Brother" || recipientValue === "Sister" || recipientValue === "Relatives" || recipientValue === "Others") {
+            recipientNameInput.show(); // Show input field if Mother, Son, Father, Brother, Sister, Relatives, or Others is selected
         } else {
             recipientNameInput.hide(); // Hide input field otherwise
         }
     }
 
     // Event listener for when the recipient dropdown changes
-    $('#recipient').change(function() {
+    $('#recipient3').change(function() {
         // Call the function to toggle recipient name input field
         toggleRecipientNameInput();
     });
