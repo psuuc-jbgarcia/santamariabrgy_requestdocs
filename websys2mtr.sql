@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2024 at 04:48 AM
+-- Generation Time: May 18, 2024 at 04:32 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -83,8 +83,8 @@ INSERT INTO `certificates` (`id`, `tracking_code`, `full_name`, `occupation`, `i
 (45, '168146', 'DSF SDF SDF', '1', '1', '2024-04-13', 'asasa', 'Indigency Certificate', 'Released', '2024-04-13 20:07:45', 'try123asasas', 'admingarcia@gmail.comasasasas', 'Myself'),
 (46, '749772', 'DSF SDF SDF', 'sdf', '12', '2024-04-19', 'sds', 'Indigency Certificate', 'Released', '2024-04-13 20:08:14', 'try123asasas', 'admingarcia@gmail.comasasasas', 'Jerico'),
 (47, '829162', 'Jerico B Garcia', '12', '12', '2024-05-01', 'as', 'Indigency Certificate', 'Pending', '2024-04-13 20:44:08', 'try123', 'gjeric54321@gmail.com', 'Myself'),
-(48, '550365', 'Jerico B Garcia', '1', '12', '2024-04-11', '12', 'Indigency Certificate', 'Process', '2024-04-15 09:42:54', 'try123', 'gjeric54321@gmail.com', 'Myself'),
-(49, '635440', 'Jerico B Garcia', 'DFG', '1212', '2024-04-19', 'DFG', 'Indigency Certificate', 'Process', '2024-04-15 21:11:47', 'try123', 'gjeric54321@gmail.com', 'Myself');
+(48, '550365', 'Jerico B Garcia', '1', '12', '2024-04-11', '12', 'Indigency Certificate', 'Pending', '2024-04-15 09:42:54', 'try123', 'gjeric54321@gmail.com', 'Myself'),
+(49, '635440', 'Jerico B Garcia', 'DFG', '1212', '2024-04-19', 'DFG', 'Indigency Certificate', 'Pending', '2024-04-15 21:11:47', 'try123', 'gjeric54321@gmail.com', 'Myself');
 
 -- --------------------------------------------------------
 
@@ -126,9 +126,7 @@ INSERT INTO `clearance` (`cid`, `tracking_code`, `fullname`, `pickup_date`, `pur
 (201, '693392', 'Jerico B Garcia', '2024-05-02', 'ddsfsdfsdf', 'Barangay Clearance', 'Released', 'try123', '2024-04-12 18:52:34', 'gjeric54321@gmail.com', 'Myself'),
 (202, '890724', 'DSF SDF SDF', '2024-04-24', 'ASASAS', 'Barangay Clearance', 'Released', 'try123asasas', '2024-04-13 19:52:56', 'admingarcia@gmail.comasasasas', 'grace'),
 (203, '432056', 'DSF SDF SDF', '2024-05-01', 'DF', 'Barangay Clearance', 'Released', 'try123asasas', '2024-04-13 19:54:59', 'admingarcia@gmail.comasasasas', 'Myself'),
-(204, '798978', 'Jerico B Garcia', '2024-04-12', 'ASD', 'Barangay Clearance', 'Process', 'try123', '2024-04-15 16:23:38', 'gjeric54321@gmail.com', 'ASDAD'),
-(205, '222951', 'Jerico B Garcia', '2024-05-08', 'asdads', 'Barangay Clearance', 'Pending', 'try123', '2024-05-25 20:49:20', 'gjeric54321@gmail.com', 'Jimmy'),
-(206, '616576', 'Jerico B Garcia', '2024-05-25', 'try', 'Barangay Clearance', 'Pending', 'try123', '2024-05-25 20:50:58', 'gjeric54321@gmail.com', 'Jimmy Garcia');
+(204, '798978', 'Jerico B Garcia', '2024-04-12', 'ASD', 'Barangay Clearance', 'Pending', 'try123', '2024-04-15 16:23:38', 'gjeric54321@gmail.com', 'ASDAD');
 
 -- --------------------------------------------------------
 
@@ -211,11 +209,7 @@ INSERT INTO `document_logs` (`id`, `tracking_code`, `new_status`, `request_type`
 (129, '550365', 'Process', 'Indigency Certificates', 'Jeric', '2024-04-14 19:47:30', 'gjeric54321@gmail.com'),
 (130, '550365', 'Pending', 'Indigency Certificates', 'Jeric', '2024-04-14 20:21:19', 'gjeric54321@gmail.com'),
 (131, '269399', 'Process', 'Residency Certificate', 'Jeric', '2024-04-15 02:34:21', 'gjeric54321@gmail.com'),
-(132, '269399', 'Released', 'Residency Certificate', 'Jeric', '2024-05-01 19:11:11', 'gjeric54321@gmail.com'),
-(133, '550365', 'Process', 'Indigency Certificates', 'Jeric', '2024-05-25 06:04:21', 'gjeric54321@gmail.com'),
-(134, '635440', 'Process', 'Indigency Certificates', 'Jeric', '2024-05-25 06:04:56', 'gjeric54321@gmail.com'),
-(135, '751896', 'Ready to Pick Up', 'Business Permit', 'Jeric', '2024-05-25 06:05:07', 'gjeric54321@gmail.com'),
-(136, '798978', 'Process', 'Barangay Clearance', 'Jeric', '2024-05-25 06:09:39', 'gjeric54321@gmail.com');
+(132, '269399', 'Released', 'Residency Certificate', 'Jeric', '2024-05-01 19:11:11', 'gjeric54321@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -247,10 +241,7 @@ INSERT INTO `notifications` (`id`, `user_email`, `message`, `created_at`, `is_re
 (97, 'gjeric54321@gmail.com', 'Your Indigency Certificates document request with tracking code 550365 is now Process.', '2024-04-14 19:47:30', 1),
 (98, 'gjeric54321@gmail.com', 'Your Indigency Certificates document request with tracking code 550365 is now Pending.', '2024-04-14 20:21:19', 1),
 (99, 'gjeric54321@gmail.com', 'Your Residency Certificate document request with tracking code 269399 is now Process.', '2024-04-15 02:34:21', 1),
-(100, 'gjeric54321@gmail.com', 'Your Residency Certificate document request with tracking code 269399 is now Released.', '2024-05-01 19:11:11', 1),
-(101, 'gjeric54321@gmail.com', 'Your Indigency Certificates document request with tracking code 635440 is now Process.', '2024-05-25 06:04:56', 1),
-(102, 'gjeric54321@gmail.com', 'Your Business Permit document request with tracking code 751896 is now Ready to Pick Up.', '2024-05-25 06:05:07', 1),
-(103, 'gjeric54321@gmail.com', 'Your Barangay Clearance document request with tracking code 798978 is now Process.', '2024-05-25 06:09:39', 1);
+(100, 'gjeric54321@gmail.com', 'Your Residency Certificate document request with tracking code 269399 is now Released.', '2024-05-01 19:11:11', 1);
 
 -- --------------------------------------------------------
 
@@ -311,7 +302,7 @@ INSERT INTO `permits` (`id`, `tracking_code`, `business_owner_full_name`, `busin
 (27, '764996', 'Jerico B Garcia', 'rt', 'tr', '2024-04-10 00:00:00', 'Business Permit', 'Released', 'try123', '2024-04-10 17:53:54', 'gjeric54321@gmail.com', 'Mother'),
 (28, '339823', 'Jerico B Garcia', 'xd', 'f', '2024-03-06 00:00:00', 'Business Permit', 'Released', 'try123', '2024-04-10 18:11:06', 'gjeric54321@gmail.com', 'Myself'),
 (29, '194103', 'Jerico B Garcia', 'asdsad', 'asdasdsad', '2024-04-24 00:00:00', 'Business Permit', 'Released', 'try123', '2024-04-12 19:07:28', 'gjeric54321@gmail.com', 'Myself'),
-(30, '751896', 'Jerico B Garcia', 'asd', 'asd', '2024-04-12 00:00:00', 'Business Permit', 'Ready to Pick Up', 'try123', '2024-04-12 19:08:55', 'gjeric54321@gmail.com', 'jeje');
+(30, '751896', 'Jerico B Garcia', 'asd', 'asd', '2024-04-12 00:00:00', 'Business Permit', 'Process', 'try123', '2024-04-12 19:08:55', 'gjeric54321@gmail.com', 'jeje');
 
 -- --------------------------------------------------------
 
@@ -456,8 +447,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `passwords`, `fname`, `mname`, `
 (207, 'asdasdasd', 'gjeric54321@gmail.comasdadasda', '$2y$10$RdK7qS0jFCZL6hDqDZvhVO6CRAvZtmNfajlnC1Z.x8mcboAKy2cGG', 'SAD', 'ASD', 'ASD', 'male', 'Purok 1', 'Alipangpang', 'defaultpic.png'),
 (208, 'asdasd', 'asdasd@email.comasdasdasd', '$2y$10$szgMIoCp1LWhq.ovx8fiLOIbGa9zneeCih9dUlpt2KO4PyYzDXXEm', 'DAF', 'SDFSD', 'FSD', 'male', 'Purok 1', 'Alipangpang', 'defaultpic.png'),
 (209, 'ASD', 'asdasd@email.comASDASD', '$2y$10$kaX.0z5NDNM6GVXtOU4Oi.lBsip.xYGskfCJV5Wge3utnQNle4/Yy', 'SDF', 'SDF', 'SDF', 'male', 'Purok 1', 'Alipangpang', 'defaultpic.png'),
-(210, 'try123asasas', 'admingarcia@gmail.comasasasas', '$2y$10$IhALDBYubiBtDgKhowYDcO6nIVZg7STzc/RV0w/24qloN5u/vKfw6', 'DSF', 'SDF', 'SDF', 'male', 'Purok 1', 'Alipangpang', 'defaultpic.png'),
-(211, 'jeric', 'admingarcia@gmail.com', '$2y$10$bm4T5FrHgxQnc/RKeM6HkuNXKo3yiFOEV2Je1x1sGrMwuQE4Y1Jdi', 'D', 'SDF', 'SDF', 'male', 'Purok 1', 'Alipangpang', 'snapshot_1723193421.jpg');
+(210, 'try123asasas', 'admingarcia@gmail.comasasasas', '$2y$10$IhALDBYubiBtDgKhowYDcO6nIVZg7STzc/RV0w/24qloN5u/vKfw6', 'DSF', 'SDF', 'SDF', 'male', 'Purok 1', 'Alipangpang', 'defaultpic.png');
 
 -- --------------------------------------------------------
 
@@ -495,8 +485,7 @@ INSERT INTO `walkinrequests` (`id`, `firstName`, `middleName`, `lastName`, `cont
 (20, 'zxc', 'zxc', 'zxc', 'zxc', 'zxc', 'Indigency Certificate', 'asd', 'asd', '121.00', '', '', '2024-04-15 09:22:44', 'asd'),
 (21, 'Jerico', 'b', 'Garcia', '678678', 'fgfgh', 'Residency Certificate', 'sasasasa', '', '0.00', '', '', '2024-04-15 12:40:33', 'Pyas'),
 (22, 'asd', 'asd', 'asd', 'asd', 'asd', 'Residency Certificate', 'asdasd', '', '0.00', '', '', '2024-04-15 12:45:47', 'asd'),
-(23, 'asd', 'asd', 'asd', 'asd', 'asd@gmail,com', 'Residency Certificate', 'asdasd', '', '0.00', '', '', '2024-04-15 12:47:43', 'asd'),
-(24, 'Jerico', 'B', 'Garcia', '09519071316', 'a@gmail.com', 'Residency Certificate', 'Job', '', '0.00', '', '', '2024-05-25 12:54:37', 'Payas');
+(23, 'asd', 'asd', 'asd', 'asd', 'asd@gmail,com', 'Residency Certificate', 'asdasd', '', '0.00', '', '', '2024-04-15 12:47:43', 'asd');
 
 --
 -- Indexes for dumped tables
@@ -606,19 +595,19 @@ ALTER TABLE `certificates`
 -- AUTO_INCREMENT for table `clearance`
 --
 ALTER TABLE `clearance`
-  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT for table `document_logs`
 --
 ALTER TABLE `document_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -654,13 +643,13 @@ ALTER TABLE `suggestions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT for table `walkinrequests`
 --
 ALTER TABLE `walkinrequests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
